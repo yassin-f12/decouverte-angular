@@ -1,12 +1,30 @@
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 20%;
-  gap: 20px;
+/* Sur mobile, la navigation passe a la ligne au lieu de deborder. */
+mat-toolbar {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  height: auto;
+  min-height: 64px;
 }
 
-/* Le bouton du statut choisi est mis en evidence. */
-[aria-pressed='true'] {
-  background-color: #dbeafe;
+.app-name {
+  margin-right: auto;
+  font-weight: 700;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.active {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.container {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1rem;
 }

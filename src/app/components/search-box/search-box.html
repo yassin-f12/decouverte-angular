@@ -1,0 +1,10 @@
+<label for="search">Rechercher un collègue</label>
+<!-- #searchInput : une variable de template qui designe ce champ.
+     A chaque frappe, on recopie sa valeur dans le model. -->
+<input
+  #searchInput
+  id="search"
+  type="search"
+  [value]="query()"
+  (input)="query.set(searchInput.value)"
+/>

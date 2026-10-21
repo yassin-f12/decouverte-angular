@@ -1,0 +1,27 @@
+<h1 id="team-title">L'équipe</h1>
+
+<app-search-box [(query)]="search" />
+
+<p aria-live="polite">{{ filteredEmployees().length }} collègue(s) affiché(s)</p>
+
+<ul class="team">
+  @for (employee of filteredEmployees(); track employee.id) {
+    <li>
+      <app-employee-card [employee]="employee" [compact]="$index === 0" />
+      <p>{{ $index + 1 }} / {{ $count }}</p>
+
+      <button
+        type="button"
+        class="remove"
+        [attr.aria-label]="'Retirer ' + employee.firstName + ' ' + employee.lastName"
+        (click)="remove(employee.id)"
+        matFab
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </li>
+  } @empty {
+    <li>Aucun collègue ne correspond à « {{ search() }} ».</li>
+  }
+</ul>
+<p>{{ employees().length }} collègues, dont {{ remoteCompt() }} en télétravail</p>

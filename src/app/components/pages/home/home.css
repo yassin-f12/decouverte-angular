@@ -1,0 +1,4 @@
+/* Le bouton du statut choisi est mis en evidence. */
+[aria-pressed='true'] {
+  background-color: #dbeafe;
+}

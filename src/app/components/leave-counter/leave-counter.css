@@ -2,3 +2,8 @@
   color: #b91c1c;
   font-weight: 700;
 }
+.counter__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

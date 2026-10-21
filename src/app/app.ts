@@ -1,32 +1,14 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { LeaveCounter } from './components/leave-counter/leave-counter';
-import { EmployeeCard } from './components/employee-card/employee-card';
-
-type Status = 'sur site' | 'en télétravail' | 'absent';
+import { Component } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MatToolbar } from '@angular/material/toolbar';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [RouterOutlet, LeaveCounter, EmployeeCard],
+  imports: [MatButton, MatToolbar, RouterOutlet, RouterLink, RouterLinkActive],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
 export class App {
   protected readonly appName = 'TechCorp Équipe';
-  protected readonly userName = 'Alves';
-  protected msg = '';
-
-  protected readonly status = signal<Status>('sur site');
-
-  protected sayHey(): void {
-    this.msg = 'Bienvenue dans TechCorp Équipe, ' + this.userName + '!';
-  }
-
-  protected clearMessage(): void {
-    this.msg = '';
-  }
-
-  protected changeStatus(newStatus: Status): void {
-    this.status.set(newStatus);
-  }
 }

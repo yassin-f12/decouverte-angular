@@ -1,0 +1,29 @@
+<h1>Ajouter un collègue</h1>
+
+<!-- (ngSubmit) : appele au clic sur le bouton submit ou avec la touche Entree. -->
+<form class="form" (ngSubmit)="save()">
+  <div class="field">
+    <label for="first-name">Prénom</label>
+    <!-- name : obligatoire avec ngModel dans un formulaire. -->
+    <input id="first-name" name="firstName" [(ngModel)]="firstName" />
+  </div>
+
+  <div class="field">
+    <label for="last-name">Nom</label>
+    <input id="last-name" name="lastName" [(ngModel)]="lastName" />
+  </div>
+
+  <div class="field">
+    <label for="email">E-mail</label>
+    <input id="email" name="email" type="email" [(ngModel)]="email" />
+  </div>
+
+  <div class="field">
+    <label for="job">Poste</label>
+    <input id="job" name="job" [(ngModel)]="job" />
+  </div>
+
+  <p>Aperçu : {{ firstName() }} {{ lastName() }}, {{ job() }}</p>
+
+  <button type="submit">Ajouter</button>
+</form>

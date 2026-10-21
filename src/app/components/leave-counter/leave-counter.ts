@@ -1,7 +1,9 @@
 import { Component, computed, signal } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 
 @Component({
-  imports: [],
+  imports: [MatButton, MatCard, MatCardContent, MatCardHeader, MatCardTitle],
   selector: 'app-leave-counter',
   styleUrl: './leave-counter.css',
   templateUrl: './leave-counter.html',

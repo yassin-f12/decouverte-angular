@@ -1,0 +1,30 @@
+.remove {
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #b91c1c;
+  border-radius: 0.25rem;
+  background: none;
+  color: #b91c1c;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Mobile d'abord : une colonne, puis une grille sur les écrans plus larges. */
+.team {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .team {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .team {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

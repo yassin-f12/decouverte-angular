@@ -6,8 +6,9 @@
 }
 
 body {
-  margin: 0;
-  padding: 1rem;
+  /* le thème Material fixe déjà la marge du `body` donc pas besoin de margin et padding ici*/
+  /* margin: 0; */
+  /* padding: 1rem; */
   font-family: system-ui, sans-serif;
   line-height: 1.5;
 }

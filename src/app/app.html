@@ -1,62 +1,27 @@
-<main>
-  <h1>{{ appName }}</h1>
-  <p>Bonjour {{ userName }}</p>
+<header>
+  <mat-toolbar>
+    <span class="app-name">{{ appName }}</span>
+    <nav aria-label="Navigation principale">
+      <a
+        matButton
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+      >
+        Accueil
+      </a>
+      <a matButton routerLink="/equipe" routerLinkActive="active" ariaCurrentWhenActive="page">
+        Équipe
+      </a>
+      <a matButton routerLink="/ajouter" routerLinkActive="active" ariaCurrentWhenActive="page">
+        Ajouter
+      </a>
+    </nav>
+  </mat-toolbar>
+</header>
 
-  <p>Nous sommes en {{ 2020 + 6 }}. Votre prénom compte {{ userName.length }} lettres.</p>
-  <p>En majuscules : {{ userName.toUpperCase() }}</p>
-
-  <button type="button" (click)="sayHey()">Dire Hey !</button>
-  <p aria-live="polite">{{ msg.toUpperCase() }}</p>
-
-  <button type="button" (click)="clearMessage()">Effacer</button>
-
-  <section>
-    <label for="champ">Écrit</label>
-    <!-- #champ => variable de référence de template -->
-    <input #champ (input)="(0)" type="text" id="champ" placeholder="tape quelque chose ici" />
-    <p>Vous avez tapé : {{ champ.value }}</p>
-  </section>
-
-  <section aria-labelledby="status-title">
-    <h2 id="status-title">Mon statut aujourd'hui</h2>
-    <!-- On LIT un signal en l'appelant : status() -->
-    <p>
-      Vous êtes : <strong>{{ status() }}</strong>
-    </p>
-
-    <button
-      type="button"
-      [attr.aria-pressed]="status() === 'sur site'"
-      (click)="changeStatus('sur site')"
-    >
-      Sur site
-    </button>
-    <button
-      type="button"
-      [attr.aria-pressed]="status() === 'en télétravail'"
-      (click)="changeStatus('en télétravail')"
-    >
-      En télétravail
-    </button>
-    <button
-      type="button"
-      [attr.aria-pressed]="status() === 'absent'"
-      (click)="changeStatus('absent')"
-    >
-      Absent
-    </button>
-  </section>
-
-  <section aria-labelledby="leave-title">
-    <h2 id="leave-title">Mes congés</h2>
-    <app-leave-counter />
-  </section>
-
-  <section aria-labelledby="team-title">
-    <h2 id="team-title">L'équipe</h2>
-    <app-employee-card />
-    <app-employee-card />
-  </section>
-
+<main class="container">
+  <!-- La page correspondant a l'adresse s'affiche ici. -->
   <router-outlet />
 </main>

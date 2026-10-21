@@ -1,4 +1,16 @@
 <article class="card">
-  <h3>Claire Martin</h3>
-  <p>Développeuse front-end</p>
+  @if (compact()) {
+    <div class="card__initials" aria-hidden="true">
+      {{ initiales() }}
+    </div>
+    <p class="card__job">{{ employee().job }}</p>
+  } @else {
+    <h3 class="card__name">{{ employee().firstName }} {{ employee().lastName }}</h3>
+    <p class="card__job">{{ employee().job }}</p>
+    <p>{{ employee().department }}</p>
+    <!-- Liaison de propriete : l'adresse du lien est construite a partir des donnees. -->
+    <a [href]="'mailto:' + employee().email">{{ employee().email }}</a>
+
+    <app-status-badge [remote]="employee().remote" />
+  }
 </article>

@@ -1,0 +1,60 @@
+<h1>Bonjour {{ userName }}</h1>
+
+<p>Nous sommes en {{ 2020 + 6 }}. Votre prénom compte {{ userName.length }} lettres.</p>
+<p>En majuscules : {{ userName.toUpperCase() }}</p>
+
+<button matButton="tonal" type="button" (click)="sayHey()">Dire Hey !</button>
+<p aria-live="polite">{{ msg.toUpperCase() }}</p>
+
+<button matButton="tonal" type="button" (click)="clearMessage()">Effacer</button>
+
+<section>
+  <label for="champ">Écrit</label>
+  <!-- #champ => variable de référence de template -->
+  <input
+    #champ
+    (input)="recupererTexte(champ.value)"
+    type="text"
+    id="champ"
+    placeholder="tape quelque chose ici"
+  />
+  <p>Vous avez tapé : {{ champ.value }}</p>
+</section>
+
+<section aria-labelledby="status-title">
+  <h2 id="status-title">Mon statut aujourd'hui</h2>
+  <!-- On LIT un signal en l'appelant : status() -->
+  <p>
+    Vous êtes : <strong>{{ status() }}</strong>
+  </p>
+
+  <button
+    type="button"
+    [attr.aria-pressed]="status() === 'sur site'"
+    (click)="changeStatus('sur site')"
+    matButton="outlined"
+  >
+    Sur site
+  </button>
+  <button
+    type="button"
+    [attr.aria-pressed]="status() === 'en télétravail'"
+    (click)="changeStatus('en télétravail')"
+    matButton="outlined"
+  >
+    En télétravail
+  </button>
+  <button
+    type="button"
+    [attr.aria-pressed]="status() === 'absent'"
+    (click)="changeStatus('absent')"
+    matButton="outlined"
+  >
+    Absent
+  </button>
+</section>
+
+<section aria-labelledby="leave-title">
+  <h2 id="leave-title">Mes congés</h2>
+  <app-leave-counter />
+</section>

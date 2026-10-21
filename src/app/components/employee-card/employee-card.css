@@ -1,0 +1,23 @@
+/* :host designe la balise du composant elle-meme, <app-employee-card>.
+   Par defaut, une balise inconnue est "inline" : on la passe en bloc. */
+:host {
+  display: block;
+}
+
+/* Ces styles ne s'appliquent qu'a ce composant. */
+.card {
+  padding: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+}
+
+.card__name {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.card__job {
+  margin: 0.25rem 0;
+  color: #4b5563;
+}
