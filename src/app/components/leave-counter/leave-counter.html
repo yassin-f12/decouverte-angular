@@ -1,0 +1,17 @@
+<p>Jours posés : {{ daysTaken() }}</p>
+<!-- aria-live : le lecteur d'ecran annonce le nouveau solde. -->
+<p aria-live="polite" [class.counter--empty]="isEmpty()">
+  Jours restants : {{ remainingDays() }} / {{ totalDays }}
+</p>
+<p aria-live="polite">Vous avez utilisé : {{ usedPercent() }}% de vos congés</p>
+
+@for (item of history(); track $index) {
+  <p>{{ item }}</p>
+}
+
+<button type="button" [disabled]="isEmpty()" (click)="addDay()">Poser un jour</button>
+<button type="button" [disabled]="daysTaken() === 0" (click)="removeDay()">Annuler un jour</button>
+<button type="button" (click)="reset()">Remettre à zéro</button>
+<button type="button" (click)="week()" [disabled]="daysTaken() >= totalDays">
+  Poser une semaine
+</button>

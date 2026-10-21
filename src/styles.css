@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+/* Styles globaux : ils s'appliquent a toute l'application. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+/* Contour de focus bien visible pour la navigation au clavier. */
+:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
+}
