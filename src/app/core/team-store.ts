@@ -1,4 +1,4 @@
-import { Service, signal } from '@angular/core';
+import { computed, Service, signal } from '@angular/core';
 import { Employee } from '../models/employee';
 
 // @Service() : Angular crée une seule instance, partagée par toute l'application.
@@ -38,6 +38,10 @@ export class TeamStore {
   // Version en lecture seule pour les composants.
   readonly employees = this.employeesSignal.asReadonly();
 
+  readonly remoteCount = computed(
+    () => this.employeesSignal().filter((employee) => employee.remote).length,
+  );
+
   // Prochain identifiant libre : 3 collègues au départ. attention c que dans le cas de c  tp, dans un projet avec bdd, le id viens de labas
   private nextId = 4;
 
@@ -49,5 +53,9 @@ export class TeamStore {
 
   remove(id: number): void {
     this.employeesSignal.update((list) => list.filter((employee) => employee.id !== id));
+  }
+
+  findById(id: number): Employee | undefined {
+    return this.employeesSignal().find((employee) => employee.id === id);
   }
 }

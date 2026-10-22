@@ -1,29 +1,139 @@
 <h1>Ajouter un collègue</h1>
 
-<!-- (ngSubmit) : appele au clic sur le bouton submit ou avec la touche Entree. -->
-<form class="form" (ngSubmit)="save()">
+<p>Tous les champs sont obligatoires, sauf le télétravail.</p>
+
+<!-- @let : un raccourci vers l'etat de chaque champ. -->
+@let firstName = employeeForm.firstName(); @let lastName = employeeForm.lastName();
+@let emailField = employeeForm.email(); @let job = employeeForm.job();
+
+<form class="form" [formRoot]="employeeForm">
+  @if (submitAttempted() && employeeForm().errorSummary().length) {
+    <div role="alert">
+      <h2>Veuillez corriger les erreurs suivantes :</h2>
+      <ul>
+        @for (listsErrors of employeeForm().errorSummary(); track $index) {
+          <li>{{ listsErrors.message }}</li>
+        }
+      </ul>
+    </div>
+  }
   <div class="field">
     <label for="first-name">Prénom</label>
-    <!-- name : obligatoire avec ngModel dans un formulaire. -->
-    <input id="first-name" name="firstName" [(ngModel)]="firstName" />
+    <input
+      id="first-name"
+      [formField]="employeeForm.firstName"
+      [attr.aria-invalid]="firstName.touched() && firstName.invalid()"
+      [attr.aria-describedby]="
+        firstName.touched() && firstName.invalid() ? 'first-name-error' : null
+      "
+    />
+    @if (firstName.touched() && firstName.invalid()) {
+      <!-- errors()[0] : on affiche la premiere erreur du champ. -->
+      <p class="field__error" id="first-name-error">{{ firstName.errors()[0].message }}</p>
+    }
   </div>
 
   <div class="field">
     <label for="last-name">Nom</label>
-    <input id="last-name" name="lastName" [(ngModel)]="lastName" />
+    <input
+      id="last-name"
+      [formField]="employeeForm.lastName"
+      [attr.aria-invalid]="lastName.touched() && lastName.invalid()"
+      [attr.aria-describedby]="lastName.touched() && lastName.invalid() ? 'last-name-error' : null"
+    />
+    @if (lastName.touched() && lastName.invalid()) {
+      @for (error of lastName.errors(); track error) {
+        <p class="field__error" id="last-name-error">
+          {{ error.message }}
+        </p>
+      }
+    }
   </div>
 
   <div class="field">
     <label for="email">E-mail</label>
-    <input id="email" name="email" type="email" [(ngModel)]="email" />
+    <input
+      id="email"
+      type="email"
+      [formField]="employeeForm.email"
+      [attr.aria-invalid]="emailField.touched() && emailField.invalid()"
+      [attr.aria-describedby]="
+        emailField.touched() && emailField.invalid() ? 'emailField-error' : null
+      "
+    />
+    @if (emailField.touched() && emailField.invalid()) {
+      @for (error of emailField.errors(); track error) {
+        <p class="field__error" id="emailField-error">
+          {{ error.message }}
+        </p>
+      }
+    }
   </div>
 
   <div class="field">
     <label for="job">Poste</label>
-    <input id="job" name="job" [(ngModel)]="job" />
+    <input
+      id="job"
+      [formField]="employeeForm.job"
+      [attr.aria-invalid]="job.touched() && job.invalid()"
+      [attr.aria-describedby]="job.touched() && job.invalid() ? 'job-error' : 'job-hint'"
+    />
+    <small id="job-hint">{{ job.value().length }} / 40 caractères</small>
+    @if (job.touched() && job.invalid()) {
+      <p class="field__error" id="job-error">{{ job.errors()[0].message }}</p>
+    }
   </div>
 
-  <p>Aperçu : {{ firstName() }} {{ lastName() }}, {{ job() }}</p>
+  <div class="field">
+    <label for="department">Service</label>
+    <select id="department" [formField]="employeeForm.department">
+      @for (department of departments; track department) {
+        <option [value]="department">{{ department }}</option>
+      }
+    </select>
+  </div>
 
-  <button type="submit">Ajouter</button>
+  <!-- Une case a cocher se relie a un booleen. -->
+  <div class="field field--inline">
+    <input id="remote" type="checkbox" [formField]="employeeForm.remote" />
+    <label for="remote">En télétravail</label>
+  </div>
+
+  @if (employeeForm.remote().value()) {
+    <div class="field">
+      <label for="remoteCheck">Jours de télétravail par semaine</label>
+      <input
+        type="number"
+        id="remoteCheck"
+        [formField]="employeeForm.remoteDays"
+        [attr.aria-invalid]="
+          employeeForm.remoteDays().touched() && employeeForm.remoteDays().invalid()
+        "
+        [attr.aria-describedby]="
+          employeeForm.remoteDays().touched() && employeeForm.remoteDays().invalid()
+            ? 'remoteDays-error'
+            : null
+        "
+      />
+    </div>
+    @if (employeeForm.remoteDays().touched() && employeeForm.remoteDays().invalid()) {
+      <p class="field__error" id="remoteDays-error">
+        {{ employeeForm.remoteDays().errors()[0].message }}
+      </p>
+    }
+  }
+
+  <!-- employeeForm.firstName() : l'ETAT du champ. .value() : sa valeur. -->
+  <p>
+    Aperçu : {{ employeeForm.firstName().value() }} {{ employeeForm.lastName().value() }},
+    {{ employeeForm.job().value() }} ({{ employeeForm.department().value() }})
+  </p>
+
+  <div class="form__actions">
+    <button matButton="filled" type="submit" [disabled]="employeeForm().submitting()">
+      Ajouter
+    </button>
+    <!-- type="button" : ce bouton n'envoie PAS le formulaire. -->
+    <button matButton="outlined" type="button" (click)="resetForm()">Effacer</button>
+  </div>
 </form>

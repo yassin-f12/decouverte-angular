@@ -1,11 +1,15 @@
 <article class="card">
   @if (compact()) {
     <div class="card__initials" aria-hidden="true">
-      {{ initiales() }}
+      <a [routerLink]="['/equipe', employee().id]">{{ initiales() }}</a>
     </div>
     <p class="card__job">{{ employee().job }}</p>
   } @else {
-    <h3 class="card__name">{{ employee().firstName }} {{ employee().lastName }}</h3>
+    <h3 class="card__name">
+      <a [routerLink]="['/equipe', employee().id]"
+        >{{ employee().firstName }} {{ employee().lastName }}</a
+      >
+    </h3>
     <p class="card__job">{{ employee().job }}</p>
     <p>{{ employee().department }}</p>
     <!-- Liaison de propriete : l'adresse du lien est construite a partir des donnees. -->

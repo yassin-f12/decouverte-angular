@@ -1,6 +1,13 @@
 <h1 id="team-title">L'équipe</h1>
+<p>{{ employees().length }} collègues, dont {{ remoteCount() }} en télétravail</p>
 
 <app-search-box [(query)]="search" />
+
+<select name="" id="" #service (change)="select(service.value)">
+  <option value="tous">Tous</option>
+  <option value="Informatique">Informatique</option>
+  <option value="Ressources humaines">Ressources humaines</option>
+</select>
 
 <p aria-live="polite">{{ filteredEmployees().length }} collègue(s) affiché(s)</p>
 
@@ -24,4 +31,3 @@
     <li>Aucun collègue ne correspond à « {{ search() }} ».</li>
   }
 </ul>
-<p>{{ employees().length }} collègues, dont {{ remoteCompt() }} en télétravail</p>

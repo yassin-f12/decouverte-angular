@@ -1,9 +1,10 @@
 import { Component, computed, input } from '@angular/core';
 import { Employee } from '../../models/employee';
 import { StatusBadge } from '../status-badge/status-badge';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [StatusBadge],
+  imports: [StatusBadge, RouterLink],
   selector: 'app-employee-card',
   styleUrl: './employee-card.css',
   templateUrl: './employee-card.html',

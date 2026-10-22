@@ -1,0 +1,15 @@
+@if (employee(); as collegue) {
+  <div class="card">
+    <h1>{{ collegue.firstName }} {{ collegue.lastName }}</h1>
+    <p class="card__job">{{ collegue.job }}</p>
+    <p>{{ collegue.department }}</p>
+    <a [href]="'mailto:' + collegue.email">{{ collegue.email }}</a>
+
+    <app-status-badge [remote]="collegue.remote" />
+
+    <a matButton routerLink="/equipe">Retour à l'équipe</a>
+  </div>
+} @else {
+  <p>Collègue introuvable</p>
+  <a matButton routerLink="/equipe">Retour à l'équipe</a>
+}
