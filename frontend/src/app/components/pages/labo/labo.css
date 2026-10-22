@@ -1,0 +1,14 @@
+section {
+  margin-top: 2rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.logs {
+  min-height: 3rem;
+  font-family: ui-monospace, monospace;
+}

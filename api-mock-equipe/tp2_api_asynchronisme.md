@@ -21,41 +21,40 @@ Chaque module suit le même plan que le TP 1 bonus : **La notion**, **Pas à pas
 
 ## Choisir son niveau
 
-| Niveau | Ce que vous faites | Pour qui |
-|---|---|---|
-| **Débutant** | Tous les modules "Pas à pas", dans l'ordre | Les jours 4 et 5 vous ont semblé difficiles |
-| **Intermédiaire** | Les modules, puis le **défi intermédiaire** de chaque phase (indices fournis) | Les modules vous semblent faciles |
-| **Avancé** | Les modules en lecture rapide, puis le **défi avancé** de chaque phase (sans aide) | Vous êtes à l'aise avec le TP 1 bonus |
+| Niveau            | Ce que vous faites                                                                 | Pour qui                                    |
+| ----------------- | ---------------------------------------------------------------------------------- | ------------------------------------------- |
+| **Débutant**      | Tous les modules "Pas à pas", dans l'ordre                                         | Les jours 4 et 5 vous ont semblé difficiles |
+| **Intermédiaire** | Les modules, puis le **défi intermédiaire** de chaque phase (indices fournis)      | Les modules vous semblent faciles           |
+| **Avancé**        | Les modules en lecture rapide, puis le **défi avancé** de chaque phase (sans aide) | Vous êtes à l'aise avec le TP 1 bonus       |
 
 ## Plan du TP
 
-| Phase | Modules | Ce que vous construisez |
-|---|---|---|
-| 1. L'asynchronisme | 1 à 4 | Une page "Labo" : minuteur, chargement simulé, chronomètre, horloge |
-| 2. Consommer une API | 5 à 8 | Les services de l'entreprise chargés depuis le serveur |
-| 3. Authentification et routes protégées | 9 à 15 | Connexion, jeton, pages réservées, rôles, session expirée |
-| 4. Le CRUD des collègues | 16 à 21 | Annuaire, recherche, fiche, ajout, modification, suppression |
-| 5. Les congés | 22 et 23 | Mes demandes de congé : liste, nouvelle demande, annulation |
+| Phase                                   | Modules  | Ce que vous construisez                                             |
+| --------------------------------------- | -------- | ------------------------------------------------------------------- |
+| 1. L'asynchronisme                      | 1 à 4    | Une page "Labo" : minuteur, chargement simulé, chronomètre, horloge |
+| 2. Consommer une API                    | 5 à 8    | Les services de l'entreprise chargés depuis le serveur              |
+| 3. Authentification et routes protégées | 9 à 15   | Connexion, jeton, pages réservées, rôles, session expirée           |
+| 4. Le CRUD des collègues                | 16 à 21  | Annuaire, recherche, fiche, ajout, modification, suppression        |
+| 5. Les congés                           | 22 et 23 | Mes demandes de congé : liste, nouvelle demande, annulation         |
 
 ### Le vocabulaire en un coup d'oeil
 
-| Mot | Ce que c'est |
-|---|---|
-| **Asynchrone** | Une opération dont le résultat arrive **plus tard** (minuteur, réponse d'un serveur) |
-| **Promise** | Une promesse de **une** valeur future. On l'attend avec `await` |
-| **Observable** | Un **flux** de valeurs dans le temps (zéro, une ou plusieurs). On s'y **abonne** avec `subscribe` |
-| **Opérateur** | Une fonction RxJS qui transforme un flux : `map`, `filter`, `debounceTime`... |
-| **API REST** | Un serveur qui répond à des requêtes HTTP (`GET`, `POST`, `PUT`, `DELETE`) avec du JSON |
-| **Jeton** (token) | Une chaîne secrète remise à la connexion, à renvoyer à chaque requête pour prouver qui on est |
-| **Intercepteur** | Une fonction appelée pour **chaque** requête HTTP de l'application |
-| **Guard** | Une fonction qui autorise ou refuse l'accès à une route |
+| Mot               | Ce que c'est                                                                                      |
+| ----------------- | ------------------------------------------------------------------------------------------------- |
+| **Asynchrone**    | Une opération dont le résultat arrive **plus tard** (minuteur, réponse d'un serveur)              |
+| **Promise**       | Une promesse de **une** valeur future. On l'attend avec `await`                                   |
+| **Observable**    | Un **flux** de valeurs dans le temps (zéro, une ou plusieurs). On s'y **abonne** avec `subscribe` |
+| **Opérateur**     | Une fonction RxJS qui transforme un flux : `map`, `filter`, `debounceTime`...                     |
+| **API REST**      | Un serveur qui répond à des requêtes HTTP (`GET`, `POST`, `PUT`, `DELETE`) avec du JSON           |
+| **Jeton** (token) | Une chaîne secrète remise à la connexion, à renvoyer à chaque requête pour prouver qui on est     |
+| **Intercepteur**  | Une fonction appelée pour **chaque** requête HTTP de l'application                                |
+| **Guard**         | Une fonction qui autorise ou refuse l'accès à une route                                           |
 
 ---
 
 ## Avant de commencer (10 min)
 
 1. **Votre projet** : ouvrez votre projet `decouverte-angular` du TP 1 bonus dans VS Code. S'il est incomplet ou ne démarre pas, demandez au formateur la correction du TP 1 bonus et repartez de celle-ci (`npm install` puis `npm start`).
-
 2. **La fausse API** : récupérez le dossier `api-mock-equipe` fourni par le formateur et placez-le **à côté** de votre projet :
 
 ```text
@@ -65,7 +64,6 @@ Chaque module suit le même plan que le TP 1 bonus : **La notion**, **Pas à pas
 ```
 
 3. Vérifiez que votre projet démarre (`npm start`) et que `ng build` passe, avant de modifier quoi que ce soit.
-
 4. Faites un commit : `git add .` puis `git commit -m "Fin du TP 1 bonus"`. Vous pourrez toujours revenir à ce point.
 
 ---
@@ -83,9 +81,9 @@ Le code JavaScript s'exécute **ligne après ligne** : c'est le fonctionnement *
 Ces opérations sont donc **asynchrones** : on les lance, le code **continue** sans attendre, et une fonction (appelée **callback**) est exécutée plus tard, quand le résultat est prêt.
 
 ```ts
-console.log('A');
-setTimeout(() => console.log('C'), 1000); // "dans une seconde, affiche C"
-console.log('B');
+console.log("A");
+setTimeout(() => console.log("C"), 1000); // "dans une seconde, affiche C"
+console.log("B");
 // Affiche A, B... puis C une seconde plus tard.
 ```
 
@@ -100,14 +98,14 @@ ng generate component pages/labo
 2. `src/app/pages/labo/labo.ts` :
 
 ```ts
-import { Component, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { Component, signal } from "@angular/core";
+import { MatButton } from "@angular/material/button";
 
 @Component({
   imports: [MatButton],
-  selector: 'app-labo',
-  styleUrl: './labo.css',
-  templateUrl: './labo.html',
+  selector: "app-labo",
+  styleUrl: "./labo.css",
+  templateUrl: "./labo.html",
 })
 export class Labo {
   // Module 1 : l'ordre d'exécution.
@@ -115,9 +113,12 @@ export class Labo {
 
   protected runTimeout(): void {
     this.logs.set([]);
-    this.log('1. Avant setTimeout');
-    setTimeout(() => this.log('3. Dans setTimeout, une seconde plus tard'), 1000);
-    this.log('2. Après setTimeout');
+    this.log("1. Avant setTimeout");
+    setTimeout(
+      () => this.log("3. Dans setTimeout, une seconde plus tard"),
+      1000,
+    );
+    this.log("2. Après setTimeout");
   }
 
   private log(message: string): void {
@@ -134,11 +135,13 @@ export class Labo {
 <section aria-labelledby="order-title">
   <h2 id="order-title">1. L'ordre d'exécution</h2>
   <div class="actions">
-    <button matButton="outlined" type="button" (click)="runTimeout()">Lancer setTimeout</button>
+    <button matButton="outlined" type="button" (click)="runTimeout()">
+      Lancer setTimeout
+    </button>
   </div>
   <ol class="logs" aria-live="polite">
     @for (line of logs(); track $index) {
-      <li>{{ line }}</li>
+    <li>{{ line }}</li>
     }
   </ol>
 </section>
@@ -166,7 +169,7 @@ section {
 5. Ajoutez la route dans `src/app/app.routes.ts`, **avant** la route `**` :
 
 ```ts
-import { Labo } from './pages/labo/labo';
+import { Labo } from "./pages/labo/labo";
 ```
 
 ```ts
@@ -176,9 +179,13 @@ import { Labo } from './pages/labo/labo';
 6. Ajoutez le lien dans la navigation de `src/app/app.html`, après "Ajouter" :
 
 ```html
-      <a matButton routerLink="/labo" routerLinkActive="active" ariaCurrentWhenActive="page"
-        >Labo</a
-      >
+<a
+  matButton
+  routerLink="/labo"
+  routerLinkActive="active"
+  ariaCurrentWhenActive="page"
+  >Labo</a
+>
 ```
 
 ### Vérifier
@@ -216,7 +223,7 @@ Une Promise rejetée lève une erreur à l'endroit du `await` : on l'attrape ave
 ```ts
 const TIPS = [
   "Lisez toujours le message d'erreur en entier.",
-  'Un signal se lit avec des parenthèses.',
+  "Un signal se lit avec des parenthèses.",
   "Vérifiez l'onglet Réseau avant d'accuser le code.",
 ];
 
@@ -229,7 +236,7 @@ function wait(ms: number): Promise<void> {
 async function fetchTip(): Promise<string> {
   await wait(1500);
   if (Math.random() < 0.33) {
-    throw new Error('Le serveur ne répond pas.');
+    throw new Error("Le serveur ne répond pas.");
   }
   return TIPS[Math.floor(Math.random() * TIPS.length)];
 }
@@ -263,16 +270,17 @@ async function fetchTip(): Promise<string> {
 ```html
 <section aria-labelledby="promise-title">
   <h2 id="promise-title">2. Une Promise avec async / await</h2>
-  <button matButton="filled" type="button" [disabled]="loading()" (click)="loadTip()">
+  <button
+    matButton="filled"
+    type="button"
+    [disabled]="loading()"
+    (click)="loadTip()"
+  >
     Conseil du jour
   </button>
   <!-- aria-busy : le lecteur d'ecran sait que la zone est en cours de mise a jour. -->
   <p aria-live="polite" [attr.aria-busy]="loading()">
-    @if (loading()) {
-      Chargement...
-    } @else {
-      {{ tip() }}
-    }
+    @if (loading()) { Chargement... } @else { {{ tip() }} }
   </p>
 </section>
 ```
@@ -293,11 +301,11 @@ Ce trio **chargement / succès / erreur** est le schéma de base de tout appel �
 
 Une Promise donne **une seule** valeur. Un **Observable** (bibliothèque **RxJS**, installée avec Angular) est un **flux** : il peut émettre **plusieurs valeurs** dans le temps, puis éventuellement se terminer.
 
-| | Promise | Observable |
-|---|---|---|
-| Nombre de valeurs | Une | Zéro, une ou plusieurs |
-| Démarrage | Tout de suite, à la création | Seulement quand quelqu'un s'**abonne** (`subscribe`) |
-| Arrêt | Impossible | `unsubscribe()` |
+|                   | Promise                      | Observable                                           |
+| ----------------- | ---------------------------- | ---------------------------------------------------- |
+| Nombre de valeurs | Une                          | Zéro, une ou plusieurs                               |
+| Démarrage         | Tout de suite, à la création | Seulement quand quelqu'un s'**abonne** (`subscribe`) |
+| Arrêt             | Impossible                   | `unsubscribe()`                                      |
 
 `interval(1000)` crée un Observable qui émet 0, 1, 2, 3... toutes les secondes, **sans fin**. Si on ne se désabonne pas, il continue même quand on a quitté la page : c'est une **fuite mémoire**.
 
@@ -306,10 +314,10 @@ Une Promise donne **une seule** valeur. Un **Observable** (bibliothèque **RxJS*
 1. Dans `labo.ts`, les imports deviennent :
 
 ```ts
-import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatButton } from '@angular/material/button';
-import { Subscription, interval } from 'rxjs';
+import { Component, DestroyRef, inject, signal } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { MatButton } from "@angular/material/button";
+import { Subscription, interval } from "rxjs";
 ```
 
 2. Dans la classe, ajoutez :
@@ -343,10 +351,20 @@ import { Subscription, interval } from 'rxjs';
   <h2 id="chrono-title">3. Un Observable : le chronomètre</h2>
   <p>Secondes écoulées : {{ seconds() }}</p>
   <div class="actions">
-    <button matButton="filled" type="button" [disabled]="running()" (click)="startChrono()">
+    <button
+      matButton="filled"
+      type="button"
+      [disabled]="running()"
+      (click)="startChrono()"
+    >
       Démarrer
     </button>
-    <button matButton="outlined" type="button" [disabled]="!running()" (click)="stopChrono()">
+    <button
+      matButton="outlined"
+      type="button"
+      [disabled]="!running()"
+      (click)="stopChrono()"
+    >
       Arrêter
     </button>
   </div>
@@ -354,7 +372,6 @@ import { Subscription, interval } from 'rxjs';
 ```
 
 4. **Observez la fuite** : ouvrez la console (`F12`), démarrez le chronomètre, puis allez sur la page "Accueil" **sans l'arrêter**. Les "tic" continuent dans la console : l'abonnement est toujours actif alors que la page n'existe plus.
-
 5. **Corrigez la fuite** : en haut de la classe, demandez à Angular un `DestroyRef` (il sait quand le composant est détruit) :
 
 ```ts
@@ -364,13 +381,13 @@ import { Subscription, interval } from 'rxjs';
 Puis, dans `startChrono()`, ajoutez un `pipe` avant le `subscribe` :
 
 ```ts
-    this.chronoSubscription = interval(1000)
-      // takeUntilDestroyed : désabonnement automatique quand on quitte la page.
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((value) => {
-        console.log('tic', value);
-        this.seconds.set(value + 1);
-      });
+this.chronoSubscription = interval(1000)
+  // takeUntilDestroyed : désabonnement automatique quand on quitte la page.
+  .pipe(takeUntilDestroyed(this.destroyRef))
+  .subscribe((value) => {
+    console.log("tic", value);
+    this.seconds.set(value + 1);
+  });
 ```
 
 ### Vérifier
@@ -391,11 +408,11 @@ Un **opérateur** transforme un flux, comme un tuyau qui filtre ou modifie ce qu
 of(1, 2, 3, 4, 5, 6)  ->  filter(pair)  ->  2, 4, 6  ->  map(x 10)  ->  20, 40, 60
 ```
 
-| Opérateur | Rôle | Équivalent sur un tableau |
-|---|---|---|
-| `map` | Transforme chaque valeur | `tableau.map(...)` |
-| `filter` | Ne garde que certaines valeurs | `tableau.filter(...)` |
-| `take(n)` | Garde les n premières valeurs, puis termine le flux | `tableau.slice(0, n)` |
+| Opérateur | Rôle                                                | Équivalent sur un tableau |
+| --------- | --------------------------------------------------- | ------------------------- |
+| `map`     | Transforme chaque valeur                            | `tableau.map(...)`        |
+| `filter`  | Ne garde que certaines valeurs                      | `tableau.filter(...)`     |
+| `take(n)` | Garde les n premières valeurs, puis termine le flux | `tableau.slice(0, n)`     |
 
 Dans Angular moderne, on affiche des **signals**. `toSignal(observable)` fait le pont : il s'abonne à l'Observable, met la dernière valeur dans un signal, et **se désabonne tout seul** quand le composant est détruit. Plus de `subscribe`, plus de fuite.
 
@@ -404,11 +421,11 @@ Dans Angular moderne, on affiche des **signals**. `toSignal(observable)` fait le
 1. Dans `labo.ts`, les imports deviennent :
 
 ```ts
-import { DatePipe } from '@angular/common';
-import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { MatButton } from '@angular/material/button';
-import { Subscription, filter, interval, map, of } from 'rxjs';
+import { DatePipe } from "@angular/common";
+import { Component, DestroyRef, inject, signal } from "@angular/core";
+import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
+import { MatButton } from "@angular/material/button";
+import { Subscription, filter, interval, map, of } from "rxjs";
 ```
 
 Ajoutez `DatePipe` au tableau `imports` du composant : `imports: [DatePipe, MatButton],`.
@@ -446,7 +463,9 @@ Ajoutez `DatePipe` au tableau `imports` du composant : `imports: [DatePipe, MatB
 4. Dans `labo.html`, ajoutez un second bouton dans la section 1, à côté de "Lancer setTimeout" :
 
 ```html
-    <button matButton="outlined" type="button" (click)="runOperators()">Lancer of + pipe</button>
+<button matButton="outlined" type="button" (click)="runOperators()">
+  Lancer of + pipe
+</button>
 ```
 
 Puis une dernière section :
@@ -464,15 +483,15 @@ Puis une dernière section :
 - L'horloge avance chaque seconde, sans aucun `subscribe` dans votre code.
 - Résumez dans votre tête les trois outils de la phase :
 
-| Outil | Quand l'utiliser |
-|---|---|
+| Outil             | Quand l'utiliser                                                 |
+| ----------------- | ---------------------------------------------------------------- |
 | `async` / `await` | Attendre **une** réponse, puis continuer (envoyer un formulaire) |
-| `subscribe` | Réagir à **chaque** valeur d'un flux (sans oublier de l'arrêter) |
-| `toSignal` | **Afficher** les valeurs d'un flux dans un template |
+| `subscribe`       | Réagir à **chaque** valeur d'un flux (sans oublier de l'arrêter) |
+| `toSignal`        | **Afficher** les valeurs d'un flux dans un template              |
 
 ---
 
-## Défis de la phase 1
+## Défis de la phase 1 -> _ta stoppé la_
 
 ### Intermédiaire
 
@@ -495,13 +514,13 @@ Indices : `interval(1000).pipe(take(10), map((n) => 9 - n))`, un signal `countdo
 
 Une **API REST** est un serveur qui répond à des requêtes HTTP avec des données JSON :
 
-| Méthode | Adresse | Action |
-|---|---|---|
-| `GET` | `/api/employees` | Lire la liste des collègues |
-| `GET` | `/api/employees/12` | Lire le collègue 12 |
-| `POST` | `/api/employees` | Créer un collègue |
-| `PUT` | `/api/employees/12` | Remplacer le collègue 12 |
-| `DELETE` | `/api/employees/12` | Supprimer le collègue 12 |
+| Méthode  | Adresse             | Action                      |
+| -------- | ------------------- | --------------------------- |
+| `GET`    | `/api/employees`    | Lire la liste des collègues |
+| `GET`    | `/api/employees/12` | Lire le collègue 12         |
+| `POST`   | `/api/employees`    | Créer un collègue           |
+| `PUT`    | `/api/employees/12` | Remplacer le collègue 12    |
+| `DELETE` | `/api/employees/12` | Supprimer le collègue 12    |
 
 Le formateur fournit une **fausse API** (`api-mock-equipe`) qui se comporte comme une vraie : elle répond avec un délai de 500 ms, demande une connexion pour la plupart des routes, et refuse certaines actions selon votre rôle.
 
@@ -548,13 +567,20 @@ Le terminal affiche l'adresse de l'API et les comptes de démonstration.
 5. Rendez `HttpClient` disponible dans toute l'application. Dans `src/app/app.config.ts` :
 
 ```ts
-import { provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
+import { provideHttpClient } from "@angular/common/http";
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+} from "@angular/core";
+import { provideRouter } from "@angular/router";
+import { routes } from "./app.routes";
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideBrowserGlobalErrorListeners(), provideHttpClient(), provideRouter(routes)],
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient(),
+    provideRouter(routes),
+  ],
 };
 ```
 
@@ -607,10 +633,10 @@ ng generate service api/department-api
 `src/app/api/department-api.ts` :
 
 ```ts
-import { HttpClient } from '@angular/common/http';
-import { Service, inject } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { Department } from '../models/department';
+import { HttpClient } from "@angular/common/http";
+import { Service, inject } from "@angular/core";
+import { Observable, map } from "rxjs";
+import { Department } from "../models/department";
 
 @Service()
 export class DepartmentApi {
@@ -618,12 +644,14 @@ export class DepartmentApi {
 
   // Renvoie un Observable : AUCUNE requête ne part tant que personne ne s'abonne.
   getAll(): Observable<Department[]> {
-    return this.http.get<Department[]>('/api/departments');
+    return this.http.get<Department[]>("/api/departments");
   }
 
   // map transforme la réponse : [{ id, name, floor }, ...] devient ['Informatique', ...].
   getNames(): Observable<string[]> {
-    return this.getAll().pipe(map((departments) => departments.map((d) => d.name)));
+    return this.getAll().pipe(
+      map((departments) => departments.map((d) => d.name)),
+    );
   }
 }
 ```
@@ -649,7 +677,7 @@ export class DepartmentApi {
 4. Dans `add-employee.html`, `departments` est maintenant un signal : lisez-le avec des parenthèses.
 
 ```html
-      @for (department of departments(); track department) {
+@for (department of departments(); track department) {
 ```
 
 ### Vérifier
@@ -671,7 +699,7 @@ Le module 6 utilise trois étapes : un signal vide, un `subscribe`, un `set`. `t
 1. Dans `add-employee.ts`, ajoutez l'import :
 
 ```ts
-import { toSignal } from '@angular/core/rxjs-interop';
+import { toSignal } from "@angular/core/rxjs-interop";
 ```
 
 2. Remplacez le signal `departments` **et** le `constructor` par :
@@ -697,13 +725,13 @@ Le template ne change pas : `departments()` reste un signal.
 
 Un vrai écran doit gérer trois situations : **en cours de chargement**, **erreur**, **données reçues**. Avec `toSignal`, il faudrait les coder à la main. `httpResource` le fait pour vous : il lance un `GET` et expose le résultat sous forme de signals.
 
-| Signal ou méthode | Signification |
-|---|---|
-| `isLoading()` | La requête est en cours |
-| `error()` | L'erreur, si la requête a échoué |
-| `hasValue()` | Une réponse est disponible |
-| `value()` | La réponse (à lire seulement si `hasValue()` vaut `true`) |
-| `reload()` | Relance la requête |
+| Signal ou méthode | Signification                                             |
+| ----------------- | --------------------------------------------------------- |
+| `isLoading()`     | La requête est en cours                                   |
+| `error()`         | L'erreur, si la requête a échoué                          |
+| `hasValue()`      | Une réponse est disponible                                |
+| `value()`         | La réponse (à lire seulement si `hasValue()` vaut `true`) |
+| `reload()`        | Relance la requête                                        |
 
 **À retenir pour la suite** : `httpResource` sert à **lire** des données (`GET`). Pour **agir** (créer, modifier, supprimer), on utilise `HttpClient`.
 
@@ -712,8 +740,8 @@ Un vrai écran doit gérer trois situations : **en cours de chargement**, **erre
 1. Dans `src/app/pages/home/home.ts`, ajoutez les imports et une ressource :
 
 ```ts
-import { httpResource } from '@angular/common/http';
-import { Department } from '../../models/department';
+import { httpResource } from "@angular/common/http";
+import { Department } from "../../models/department";
 ```
 
 ```ts
@@ -729,25 +757,21 @@ import { Department } from '../../models/department';
 
   <!-- Une seule zone annoncee au lecteur d'ecran : l'etat du chargement. -->
   <p aria-live="polite">
-    @if (departments.isLoading()) {
-      Chargement des services...
-    } @else if (departments.error()) {
-      Impossible de charger les services.
-    } @else if (departments.hasValue()) {
-      {{ departments.value().length }} services
-    }
+    @if (departments.isLoading()) { Chargement des services... } @else if
+    (departments.error()) { Impossible de charger les services. } @else if
+    (departments.hasValue()) { {{ departments.value().length }} services }
   </p>
 
   @if (departments.error()) {
-    <button matButton="outlined" type="button" (click)="departments.reload()">Réessayer</button>
-  }
-
-  @if (departments.hasValue()) {
-    <ul>
-      @for (department of departments.value(); track department.id) {
-        <li>{{ department.name }}, étage {{ department.floor }}</li>
-      }
-    </ul>
+  <button matButton="outlined" type="button" (click)="departments.reload()">
+    Réessayer
+  </button>
+  } @if (departments.hasValue()) {
+  <ul>
+    @for (department of departments.value(); track department.id) {
+    <li>{{ department.name }}, étage {{ department.floor }}</li>
+    }
+  </ul>
   }
 </section>
 ```
@@ -761,11 +785,11 @@ Pourquoi un seul paragraphe `aria-live` ? Si toute la liste était dans une zone
 - Relancez l'API (`npm start`), puis cliquez sur "Réessayer" : la liste revient, sans recharger la page.
 - Comparez les trois façons de lire des données vues dans cette phase :
 
-| Façon | Code | Chargement et erreur |
-|---|---|---|
-| `subscribe` | Signal + `subscribe` + `set` | À coder à la main |
-| `toSignal` | Une ligne | À coder à la main |
-| `httpResource` | Une ligne | Fournis : `isLoading()`, `error()`, `reload()` |
+| Façon          | Code                         | Chargement et erreur                           |
+| -------------- | ---------------------------- | ---------------------------------------------- |
+| `subscribe`    | Signal + `subscribe` + `set` | À coder à la main                              |
+| `toSignal`     | Une ligne                    | À coder à la main                              |
+| `httpResource` | Une ligne                    | Fournis : `isLoading()`, `error()`, `reload()` |
 
 ---
 
@@ -777,6 +801,7 @@ Pourquoi un seul paragraphe `aria-live` ? Si toute la liste était dans une zone
 2. Dans le formulaire d'ajout, tant que la liste des services n'est pas arrivée, désactivez la liste déroulante et affichez "Chargement des services...".
 
 Indices :
+
 - un `computed` qui lit `this.departments.value()` (après avoir vérifié `hasValue()`) et renvoie `[...liste].sort((a, b) => a.floor - b.floor)`. Pourquoi faut-il une copie avant `sort` ?
 - sans `initialValue`, `toSignal` vaut `undefined` tant que la réponse n'est pas arrivée ;
 - avec les Signal Forms, un champ se désactive dans le schéma : `disabled(path.department, () => ...)`, et pas avec `[disabled]` dans le template.
@@ -804,11 +829,11 @@ Le **jeton** est comme un badge d'entreprise : remis une fois à l'accueil (conn
 
 Comptes de démonstration (mot de passe `TechCorp2026!`) :
 
-| E-mail | Rôle |
-|---|---|
-| `claire.martin@techcorp.fr` | Employée (`employee`) |
-| `julien.bernard@techcorp.fr` | Employé (`employee`) |
-| `sarah.lefevre@techcorp.fr` | Administratrice RH (`admin`) |
+| E-mail                       | Rôle                         |
+| ---------------------------- | ---------------------------- |
+| `claire.martin@techcorp.fr`  | Employée (`employee`)        |
+| `julien.bernard@techcorp.fr` | Employé (`employee`)         |
+| `sarah.lefevre@techcorp.fr`  | Administratrice RH (`admin`) |
 
 ## Module 9 - Le service d'authentification (20 min)
 
@@ -830,7 +855,7 @@ ng generate interface models/auth
 
 ```ts
 // Les deux rôles reconnus par l'API.
-export type Role = 'employee' | 'admin';
+export type Role = "employee" | "admin";
 
 // L'utilisateur connecté, tel que renvoyé par l'API.
 export interface AuthUser {
@@ -858,10 +883,10 @@ ng generate service auth/auth-store
 `src/app/auth/auth-store.ts` :
 
 ```ts
-import { HttpClient } from '@angular/common/http';
-import { Service, computed, inject, signal } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
-import { LoginResponse } from '../models/auth';
+import { HttpClient } from "@angular/common/http";
+import { Service, computed, inject, signal } from "@angular/core";
+import { firstValueFrom } from "rxjs";
+import { LoginResponse } from "../models/auth";
 
 // L'utilisateur connecté et son jeton, partagés par toute l'application.
 @Service()
@@ -879,7 +904,7 @@ export class AuthStore {
   async login(email: string, password: string): Promise<void> {
     // firstValueFrom : transforme l'Observable de HttpClient en Promise, pour utiliser await.
     const response = await firstValueFrom(
-      this.http.post<LoginResponse>('/api/login', { email, password }),
+      this.http.post<LoginResponse>("/api/login", { email, password }),
     );
     this.session.set(response);
   }
@@ -901,13 +926,13 @@ export class AuthStore {
 Dans `src/app/app.html`, ajoutez **après** la balise `</nav>` (toujours dans `<mat-toolbar>`) :
 
 ```html
-    <div class="session">
-      @if (auth.user(); as user) {
-        <span>{{ user.firstName }} {{ user.lastName }}</span>
-      } @else {
-        <span>Non connecté</span>
-      }
-    </div>
+<div class="session">
+  @if (auth.user(); as user) {
+  <span>{{ user.firstName }} {{ user.lastName }}</span>
+  } @else {
+  <span>Non connecté</span>
+  }
+</div>
 ```
 
 `@if (auth.user(); as user)` : si l'utilisateur existe, il est disponible sous le nom `user` dans le bloc.
@@ -933,7 +958,10 @@ Dans `labo.html`, tout en haut, sous le `<h1>` :
 
 ```html
 <!-- Bouton de test provisoire, supprime au module 10. -->
-<button type="button" (click)="auth.login('claire.martin@techcorp.fr', 'TechCorp2026!')">
+<button
+  type="button"
+  (click)="auth.login('claire.martin@techcorp.fr', 'TechCorp2026!')"
+>
   Test de connexion
 </button>
 ```
@@ -960,16 +988,15 @@ Côté sécurité, le message d'erreur reste **vague** ("Adresse e-mail ou mot d
 ### Pas à pas
 
 1. Supprimez le bouton "Test de connexion" de `labo.html`, ainsi que `auth` et l'import d'`AuthStore` dans `labo.ts`.
-
 2. Un petit utilitaire transforme une erreur HTTP en message lisible. Créez `src/app/api/api-error.ts` :
 
 ```ts
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from "@angular/common/http";
 
 // Transforme une erreur HTTP en message lisible par l'utilisateur.
 export function apiErrorMessage(error: unknown): string {
   if (!(error instanceof HttpErrorResponse)) {
-    return 'Une erreur inattendue est survenue.';
+    return "Une erreur inattendue est survenue.";
   }
   // 0 : la requête n'a jamais atteint le serveur (réseau coupé).
   // 502, 503, 504 : le proxy de développement n'arrive pas à joindre l'API (serveur arrêté).
@@ -979,12 +1006,12 @@ export function apiErrorMessage(error: unknown): string {
   // Notre API renvoie { message: '...' } ou { message: ['...', '...'] }.
   const message: unknown = error.error?.message;
   if (Array.isArray(message)) {
-    return message.join(' ');
+    return message.join(" ");
   }
-  if (typeof message === 'string') {
+  if (typeof message === "string") {
     return message;
   }
-  return 'Le serveur a rencontré un problème (erreur ' + error.status + ').';
+  return "Le serveur a rencontré un problème (erreur " + error.status + ").";
 }
 ```
 
@@ -997,31 +1024,37 @@ ng generate component pages/login
 `src/app/pages/login/login.ts` :
 
 ```ts
-import { Component, inject, signal } from '@angular/core';
-import { FormField, FormRoot, email, form, required } from '@angular/forms/signals';
-import { MatButton } from '@angular/material/button';
-import { Router } from '@angular/router';
-import { apiErrorMessage } from '../../api/api-error';
-import { AuthStore } from '../../auth/auth-store';
+import { Component, inject, signal } from "@angular/core";
+import {
+  FormField,
+  FormRoot,
+  email,
+  form,
+  required,
+} from "@angular/forms/signals";
+import { MatButton } from "@angular/material/button";
+import { Router } from "@angular/router";
+import { apiErrorMessage } from "../../api/api-error";
+import { AuthStore } from "../../auth/auth-store";
 
 @Component({
   imports: [FormField, FormRoot, MatButton],
-  selector: 'app-login',
-  styleUrl: './login.css',
-  templateUrl: './login.html',
+  selector: "app-login",
+  styleUrl: "./login.css",
+  templateUrl: "./login.html",
 })
 export class Login {
   private readonly auth = inject(AuthStore);
   private readonly router = inject(Router);
 
-  private readonly credentials = signal({ email: '', password: '' });
+  private readonly credentials = signal({ email: "", password: "" });
 
   protected readonly loginForm = form(
     this.credentials,
     (path) => {
       required(path.email, { message: "L'e-mail est obligatoire." });
       email(path.email, { message: "L'e-mail n'est pas valide." });
-      required(path.password, { message: 'Le mot de passe est obligatoire.' });
+      required(path.password, { message: "Le mot de passe est obligatoire." });
     },
     {
       submission: {
@@ -1031,10 +1064,10 @@ export class Login {
   );
 
   // Erreur renvoyée par le serveur (mauvais mot de passe, serveur arrêté...).
-  protected readonly serverError = signal('');
+  protected readonly serverError = signal("");
 
   private async signIn(): Promise<void> {
-    this.serverError.set('');
+    this.serverError.set("");
     const { email, password } = this.credentials();
     try {
       // await : on attend la réponse du serveur avant de continuer.
@@ -1043,7 +1076,7 @@ export class Login {
       this.serverError.set(apiErrorMessage(error));
       return;
     }
-    await this.router.navigate(['/equipe']);
+    await this.router.navigate(["/equipe"]);
   }
 }
 ```
@@ -1053,8 +1086,7 @@ export class Login {
 ```html
 <h1>Connexion</h1>
 
-@let emailField = loginForm.email();
-@let password = loginForm.password();
+@let emailField = loginForm.email(); @let password = loginForm.password();
 
 <form class="form" [formRoot]="loginForm">
   <div class="field">
@@ -1069,7 +1101,9 @@ export class Login {
       [attr.aria-describedby]="emailField.touched() && emailField.invalid() ? 'email-error' : null"
     />
     @if (emailField.touched() && emailField.invalid()) {
-      <p class="field__error" id="email-error">{{ emailField.errors()[0].message }}</p>
+    <p class="field__error" id="email-error">
+      {{ emailField.errors()[0].message }}
+    </p>
     }
   </div>
 
@@ -1084,24 +1118,31 @@ export class Login {
       [attr.aria-describedby]="password.touched() && password.invalid() ? 'password-error' : null"
     />
     @if (password.touched() && password.invalid()) {
-      <p class="field__error" id="password-error">{{ password.errors()[0].message }}</p>
+    <p class="field__error" id="password-error">
+      {{ password.errors()[0].message }}
+    </p>
     }
   </div>
 
   <!-- role="alert" : le lecteur d'ecran annonce l'erreur des qu'elle apparait. -->
   @if (serverError()) {
-    <p class="alert" role="alert">{{ serverError() }}</p>
+  <p class="alert" role="alert">{{ serverError() }}</p>
   }
 
   <!-- submitting() vaut true pendant l'action : on evite le double envoi. -->
-  <button matButton="filled" type="submit" [disabled]="loginForm().submitting()">
+  <button
+    matButton="filled"
+    type="submit"
+    [disabled]="loginForm().submitting()"
+  >
     {{ loginForm().submitting() ? 'Connexion...' : 'Se connecter' }}
   </button>
 </form>
 
 <p class="hint">
-  Comptes de test (mot de passe <code>TechCorp2026!</code>) : claire.martin&#64;techcorp.fr
-  (employée), sarah.lefevre&#64;techcorp.fr (administratrice RH).
+  Comptes de test (mot de passe <code>TechCorp2026!</code>) :
+  claire.martin@techcorp.fr (employée), sarah.lefevre@techcorp.fr
+  (administratrice RH).
 </p>
 ```
 
@@ -1135,7 +1176,7 @@ input {
   color: #b91c1c;
 }
 
-[aria-invalid='true'] {
+[aria-invalid="true"] {
   border-color: #b91c1c;
 }
 
@@ -1162,7 +1203,7 @@ input {
 7. Dans `app.html`, remplacez `<span>Non connecté</span>` par un lien :
 
 ```html
-        <a matButton="filled" routerLink="/connexion">Se connecter</a>
+<a matButton="filled" routerLink="/connexion">Se connecter</a>
 ```
 
 ### Vérifier
@@ -1193,19 +1234,19 @@ ng generate component pages/account
 `src/app/pages/account/account.ts` :
 
 ```ts
-import { httpResource } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { AuthUser } from '../../models/auth';
+import { httpResource } from "@angular/common/http";
+import { Component } from "@angular/core";
+import { AuthUser } from "../../models/auth";
 
 @Component({
   imports: [],
-  selector: 'app-account',
-  styleUrl: './account.css',
-  templateUrl: './account.html',
+  selector: "app-account",
+  styleUrl: "./account.css",
+  templateUrl: "./account.html",
 })
 export class Account {
   // GET /api/me : sans jeton, le serveur répond 401.
-  protected readonly me = httpResource<AuthUser>(() => '/api/me');
+  protected readonly me = httpResource<AuthUser>(() => "/api/me");
 }
 ```
 
@@ -1215,18 +1256,18 @@ export class Account {
 <h1>Mon compte</h1>
 
 @if (me.isLoading()) {
-  <p>Chargement du profil...</p>
+<p>Chargement du profil...</p>
 } @else if (me.error()) {
-  <p class="error">Impossible de charger votre profil.</p>
+<p class="error">Impossible de charger votre profil.</p>
 } @else if (me.hasValue()) {
-  <dl>
-    <dt>Nom</dt>
-    <dd>{{ me.value().firstName }} {{ me.value().lastName }}</dd>
-    <dt>E-mail</dt>
-    <dd>{{ me.value().email }}</dd>
-    <dt>Rôle</dt>
-    <dd>{{ me.value().role === 'admin' ? 'Administrateur RH' : 'Employé' }}</dd>
-  </dl>
+<dl>
+  <dt>Nom</dt>
+  <dd>{{ me.value().firstName }} {{ me.value().lastName }}</dd>
+  <dt>E-mail</dt>
+  <dd>{{ me.value().email }}</dd>
+  <dt>Rôle</dt>
+  <dd>{{ me.value().role === 'admin' ? 'Administrateur RH' : 'Employé' }}</dd>
+</dl>
 }
 ```
 
@@ -1255,10 +1296,17 @@ Route dans `app.routes.ts` (importez `Account`) :
 2. Dans `app.html`, le nom de l'utilisateur devient un lien vers son compte, suivi d'un bouton de déconnexion. Remplacez le `<span>{{ user.firstName }} {{ user.lastName }}</span>` par :
 
 ```html
-        <a matButton routerLink="/compte" routerLinkActive="active" ariaCurrentWhenActive="page">
-          {{ user.firstName }} {{ user.lastName }}
-        </a>
-        <button matButton="outlined" type="button" (click)="logout()">Se déconnecter</button>
+<a
+  matButton
+  routerLink="/compte"
+  routerLinkActive="active"
+  ariaCurrentWhenActive="page"
+>
+  {{ user.firstName }} {{ user.lastName }}
+</a>
+<button matButton="outlined" type="button" (click)="logout()">
+  Se déconnecter
+</button>
 ```
 
 Dans `app.ts`, importez `Router` depuis `@angular/router` et ajoutez dans la classe :
@@ -1275,13 +1323,12 @@ Dans `app.ts`, importez `Router` depuis `@angular/router` et ajoutez dans la cla
 `void` devant une Promise : on indique qu'on ne l'attend pas, volontairement.
 
 3. **Constatez le problème** : connectez-vous, puis cliquez sur votre nom. "Impossible de charger votre profil." Onglet Réseau, requête `me` : statut **401**, et dans les "En-têtes de requête" (Request Headers), aucune ligne `Authorization`. Le front a le jeton, mais ne l'envoie pas.
-
 4. Créez l'intercepteur, `src/app/auth/auth.interceptor.ts` :
 
 ```ts
-import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { AuthStore } from './auth-store';
+import { HttpInterceptorFn } from "@angular/common/http";
+import { inject } from "@angular/core";
+import { AuthStore } from "./auth-store";
 
 // Appelé pour CHAQUE requête HttpClient (et httpResource) de l'application.
 export const authInterceptor: HttpInterceptorFn = (request, next) => {
@@ -1289,7 +1336,7 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
 
   // Le jeton part uniquement vers notre API, jamais vers un autre site.
   const authRequest =
-    token && request.url.startsWith('/api/')
+    token && request.url.startsWith("/api/")
       ? request.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
       : request;
 
@@ -1301,8 +1348,8 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
 5. Branchez-le dans `app.config.ts` :
 
 ```ts
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { authInterceptor } from './auth/auth.interceptor';
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import { authInterceptor } from "./auth/auth.interceptor";
 ```
 
 ```ts
@@ -1349,9 +1396,9 @@ Pour un utilisateur qui voulait aller sur `/equipe`, on retient sa destination d
 1. Créez `src/app/auth/auth.guards.ts` :
 
 ```ts
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthStore } from './auth-store';
+import { inject } from "@angular/core";
+import { CanActivateFn, Router } from "@angular/router";
+import { AuthStore } from "./auth-store";
 
 // Pages réservées aux utilisateurs connectés.
 export const authGuard: CanActivateFn = (_route, state) => {
@@ -1361,7 +1408,9 @@ export const authGuard: CanActivateFn = (_route, state) => {
     return true;
   }
   // Pas connecté : direction la connexion, en retenant la page demandée.
-  return router.createUrlTree(['/connexion'], { queryParams: { retour: state.url } });
+  return router.createUrlTree(["/connexion"], {
+    queryParams: { retour: state.url },
+  });
 };
 ```
 
@@ -1370,7 +1419,7 @@ export const authGuard: CanActivateFn = (_route, state) => {
 2. Dans `app.routes.ts`, importez `authGuard` et protégez trois routes avec `canActivate` :
 
 ```ts
-import { authGuard } from './auth/auth.guards';
+import { authGuard } from "./auth/auth.guards";
 ```
 
 ```ts
@@ -1405,7 +1454,7 @@ import { authGuard } from './auth/auth.guards';
 3. Pour lire `?retour=...` dans la page de connexion, activez la liaison des paramètres d'adresse aux `input()`. Dans `app.config.ts` :
 
 ```ts
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from "@angular/router";
 ```
 
 ```ts
@@ -1425,7 +1474,7 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 Dans `signIn()`, remplacez `await this.router.navigate(['/equipe']);` par :
 
 ```ts
-    await this.router.navigateByUrl(safeReturnUrl(this.retour()));
+await this.router.navigateByUrl(safeReturnUrl(this.retour()));
 ```
 
 Et ajoutez cette fonction **à la fin du fichier**, après la classe :
@@ -1434,7 +1483,7 @@ Et ajoutez cette fonction **à la fin du fichier**, après la classe :
 // Uniquement une page de NOTRE application : "/equipe" oui, "https://pirate.example" non.
 // Sinon, un lien piégé pourrait renvoyer l'utilisateur vers un faux site après connexion.
 function safeReturnUrl(url: string | undefined): string {
-  return url && url.startsWith('/') && !url.startsWith('//') ? url : '/equipe';
+  return url && url.startsWith("/") && !url.startsWith("//") ? url : "/equipe";
 }
 ```
 
@@ -1454,12 +1503,12 @@ function safeReturnUrl(url: string | undefined): string {
 
 Le jeton est dans un signal, donc en mémoire : `F5` le fait disparaître. On le recopie dans le **stockage du navigateur** pour le retrouver au démarrage.
 
-| Stockage | Durée de vie | Lisible par JavaScript |
-|---|---|---|
-| Signal (mémoire) | Jusqu'au rechargement | Oui |
-| `sessionStorage` | Jusqu'à la fermeture de l'onglet | Oui |
-| `localStorage` | Pour toujours | Oui |
-| Cookie `HttpOnly` (posé par le serveur) | Fixée par le serveur | **Non** |
+| Stockage                                | Durée de vie                     | Lisible par JavaScript |
+| --------------------------------------- | -------------------------------- | ---------------------- |
+| Signal (mémoire)                        | Jusqu'au rechargement            | Oui                    |
+| `sessionStorage`                        | Jusqu'à la fermeture de l'onglet | Oui                    |
+| `localStorage`                          | Pour toujours                    | Oui                    |
+| Cookie `HttpOnly` (posé par le serveur) | Fixée par le serveur             | **Non**                |
 
 **Le risque** : tout ce qui est lisible par JavaScript peut être volé par un script malveillant injecté dans la page (faille **XSS**). On choisit ici `sessionStorage`, un compromis : le jeton disparaît à la fermeture de l'onglet, et il expire au bout de 30 minutes. En entreprise, on préfère souvent un cookie `HttpOnly`, invisible pour JavaScript (vu au jour 5).
 
@@ -1468,12 +1517,12 @@ Le jeton est dans un signal, donc en mémoire : `F5` le fait disparaître. On le
 Remplacez **tout** le contenu de `src/app/auth/auth-store.ts` :
 
 ```ts
-import { HttpClient } from '@angular/common/http';
-import { Service, computed, inject, signal } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
-import { LoginResponse } from '../models/auth';
+import { HttpClient } from "@angular/common/http";
+import { Service, computed, inject, signal } from "@angular/core";
+import { firstValueFrom } from "rxjs";
+import { LoginResponse } from "../models/auth";
 
-const STORAGE_KEY = 'equipe.session';
+const STORAGE_KEY = "equipe.session";
 
 // L'utilisateur connecté et son jeton, partagés par toute l'application.
 @Service()
@@ -1491,7 +1540,7 @@ export class AuthStore {
   async login(email: string, password: string): Promise<void> {
     // firstValueFrom : transforme l'Observable de HttpClient en Promise, pour utiliser await.
     const response = await firstValueFrom(
-      this.http.post<LoginResponse>('/api/login', { email, password }),
+      this.http.post<LoginResponse>("/api/login", { email, password }),
     );
     this.session.set(response);
     saveSession(response);
@@ -1500,7 +1549,7 @@ export class AuthStore {
   logout(): void {
     if (this.token()) {
       // Le serveur oublie le jeton. On n'attend pas sa réponse, et on ignore une erreur.
-      this.http.post('/api/logout', {}).subscribe({ error: () => undefined });
+      this.http.post("/api/logout", {}).subscribe({ error: () => undefined });
     }
     this.clear();
   }
@@ -1514,7 +1563,9 @@ export class AuthStore {
 
 function readSession(): LoginResponse | null {
   try {
-    const stored = JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? 'null') as LoginResponse | null;
+    const stored = JSON.parse(
+      sessionStorage.getItem(STORAGE_KEY) ?? "null",
+    ) as LoginResponse | null;
     // Un jeton expiré ne sert à rien : on l'oublie.
     if (stored && new Date(stored.expiresAt).getTime() > Date.now()) {
       return stored;
@@ -1579,7 +1630,7 @@ export const adminGuard: CanActivateFn = () => {
   if (auth.isAdmin()) {
     return true;
   }
-  return router.createUrlTree(['/equipe']);
+  return router.createUrlTree(["/equipe"]);
 };
 ```
 
@@ -1598,17 +1649,24 @@ export const adminGuard: CanActivateFn = () => {
 4. Dans `app.html`, masquez les liens selon la situation :
 
 ```html
-      <!-- Liens masques si l'utilisateur n'a pas acces : les guards protegent quand meme les routes. -->
-      @if (auth.isLoggedIn()) {
-        <a matButton routerLink="/equipe" routerLinkActive="active" ariaCurrentWhenActive="page"
-          >Équipe</a
-        >
-      }
-      @if (auth.isAdmin()) {
-        <a matButton routerLink="/ajouter" routerLinkActive="active" ariaCurrentWhenActive="page"
-          >Ajouter</a
-        >
-      }
+<!-- Liens masques si l'utilisateur n'a pas acces : les guards protegent quand meme les routes. -->
+@if (auth.isLoggedIn()) {
+<a
+  matButton
+  routerLink="/equipe"
+  routerLinkActive="active"
+  ariaCurrentWhenActive="page"
+  >Équipe</a
+>
+} @if (auth.isAdmin()) {
+<a
+  matButton
+  routerLink="/ajouter"
+  routerLinkActive="active"
+  ariaCurrentWhenActive="page"
+  >Ajouter</a
+>
+}
 ```
 
 ### Vérifier
@@ -1618,8 +1676,11 @@ export const adminGuard: CanActivateFn = () => {
 - **Le serveur décide** : reconnectez-vous en tant que Claire, ouvrez la console (`F12`) et tapez (Chrome peut vous demander de taper d'abord `allow pasting` pour autoriser le collage) :
 
 ```js
-const { token } = JSON.parse(sessionStorage.getItem('equipe.session'));
-fetch('/api/employees/5', { method: 'DELETE', headers: { Authorization: 'Bearer ' + token } })
+const { token } = JSON.parse(sessionStorage.getItem("equipe.session"));
+fetch("/api/employees/5", {
+  method: "DELETE",
+  headers: { Authorization: "Bearer " + token },
+})
   .then((response) => response.json())
   .then(console.log);
 ```
@@ -1643,11 +1704,11 @@ L'opérateur RxJS `catchError` intercepte une erreur dans un flux. On y fait not
 1. Remplacez **tout** le contenu de `auth.interceptor.ts` :
 
 ```ts
-import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
-import { AuthStore } from './auth-store';
+import { HttpErrorResponse, HttpInterceptorFn } from "@angular/common/http";
+import { inject } from "@angular/core";
+import { Router } from "@angular/router";
+import { catchError, throwError } from "rxjs";
+import { AuthStore } from "./auth-store";
 
 // Appelé pour CHAQUE requête HttpClient (et httpResource) de l'application.
 export const authInterceptor: HttpInterceptorFn = (request, next) => {
@@ -1657,16 +1718,20 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
 
   // Le jeton part uniquement vers notre API, jamais vers un autre site.
   const authRequest =
-    token && request.url.startsWith('/api/')
+    token && request.url.startsWith("/api/")
       ? request.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
       : request;
 
   return next(authRequest).pipe(
     catchError((error: unknown) => {
       // 401 alors qu'on avait un jeton : il a expiré, ou le serveur a redémarré.
-      if (error instanceof HttpErrorResponse && error.status === 401 && auth.token()) {
+      if (
+        error instanceof HttpErrorResponse &&
+        error.status === 401 &&
+        auth.token()
+      ) {
         auth.clear();
-        void router.navigate(['/connexion'], {
+        void router.navigate(["/connexion"], {
           queryParams: { expiree: 1, retour: router.url },
         });
       }
@@ -1689,7 +1754,9 @@ La condition `auth.token()` est importante : un 401 sur `/api/login` (mauvais mo
 
 ```html
 @if (expiree()) {
-  <p class="info" role="status">Votre session a expiré. Reconnectez-vous pour continuer.</p>
+<p class="info" role="status">
+  Votre session a expiré. Reconnectez-vous pour continuer.
+</p>
 }
 ```
 
@@ -1721,6 +1788,7 @@ La condition `auth.token()` est importante : un 401 sur `/api/login` (mauvais mo
 2. Ajoutez un bouton "Afficher" à côté du mot de passe, qui bascule le champ entre `type="password"` et `type="text"`.
 
 Indices :
+
 - un troisième guard, `guestGuard`, qui fait l'inverse d'`authGuard` ;
 - un signal `showPassword`, `[type]="showPassword() ? 'text' : 'password'"` ;
 - pour l'accessibilité, un bouton bascule porte `[attr.aria-pressed]` (TP 1 bonus, module 7) et `type="button"` pour ne pas envoyer le formulaire.
@@ -1751,27 +1819,27 @@ La fonction passée à `httpResource` est **réactive**, comme un `computed` : e
 1. Remplacez **tout** le contenu de `src/app/pages/team-page/team-page.ts` :
 
 ```ts
-import { httpResource } from '@angular/common/http';
-import { Component, signal } from '@angular/core';
-import { EmployeeCard } from '../../employee-card/employee-card';
-import { Employee } from '../../models/employee';
-import { SearchBox } from '../../search-box/search-box';
+import { httpResource } from "@angular/common/http";
+import { Component, signal } from "@angular/core";
+import { EmployeeCard } from "../../employee-card/employee-card";
+import { Employee } from "../../models/employee";
+import { SearchBox } from "../../search-box/search-box";
 
 @Component({
   imports: [EmployeeCard, SearchBox],
-  selector: 'app-team-page',
-  styleUrl: './team-page.css',
-  templateUrl: './team-page.html',
+  selector: "app-team-page",
+  styleUrl: "./team-page.css",
+  templateUrl: "./team-page.html",
 })
 export class TeamPage {
   // Ce que l'utilisateur tape, à chaque frappe.
-  protected readonly search = signal('');
+  protected readonly search = signal("");
 
   // Relancée automatiquement quand search change.
   // ?q=... : recherche côté serveur, _sort=lastName : tri par nom.
   protected readonly employees = httpResource<Employee[]>(() => ({
-    url: '/api/employees',
-    params: { q: this.search(), _sort: 'lastName' },
+    url: "/api/employees",
+    params: { q: this.search(), _sort: "lastName" },
   }));
 }
 ```
@@ -1787,29 +1855,26 @@ export class TeamPage {
 
 <!-- Une seule zone annoncee au lecteur d'ecran : l'etat du chargement. -->
 <p aria-live="polite">
-  @if (employees.isLoading()) {
-    Chargement de l'équipe...
-  } @else if (employees.error()) {
-    Impossible de charger l'équipe.
-  } @else if (employees.hasValue()) {
-    {{ employees.value().length }} collègue(s) affiché(s)
+  @if (employees.isLoading()) { Chargement de l'équipe... } @else if
+  (employees.error()) { Impossible de charger l'équipe. } @else if
+  (employees.hasValue()) { {{ employees.value().length }} collègue(s) affiché(s)
   }
 </p>
 
 @if (employees.error()) {
-  <button type="button" class="retry" (click)="employees.reload()">Réessayer</button>
-}
-
-@if (employees.hasValue()) {
-  <ul class="team">
-    @for (employee of employees.value(); track employee.id) {
-      <li>
-        <app-employee-card [employee]="employee" />
-      </li>
-    } @empty {
-      <li>Aucun collègue ne correspond à « {{ search() }} ».</li>
-    }
-  </ul>
+<button type="button" class="retry" (click)="employees.reload()">
+  Réessayer
+</button>
+} @if (employees.hasValue()) {
+<ul class="team">
+  @for (employee of employees.value(); track employee.id) {
+  <li>
+    <app-employee-card [employee]="employee" />
+  </li>
+  } @empty {
+  <li>Aucun collègue ne correspond à « {{ search() }} ».</li>
+  }
+</ul>
 }
 ```
 
@@ -1861,8 +1926,8 @@ C'est le pont entre les deux mondes : **les signals pour l'état et l'affichage,
 1. Dans `team-page.ts`, complétez les imports :
 
 ```ts
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { toObservable, toSignal } from "@angular/core/rxjs-interop";
+import { debounceTime, distinctUntilChanged, map } from "rxjs";
 ```
 
 2. Sous le signal `search`, ajoutez :
@@ -1920,23 +1985,25 @@ ng generate component pages/employee-detail
 `src/app/pages/employee-detail/employee-detail.ts` :
 
 ```ts
-import { HttpErrorResponse, httpResource } from '@angular/common/http';
-import { Component, computed, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { Employee } from '../../models/employee';
+import { HttpErrorResponse, httpResource } from "@angular/common/http";
+import { Component, computed, input } from "@angular/core";
+import { RouterLink } from "@angular/router";
+import { Employee } from "../../models/employee";
 
 @Component({
   imports: [RouterLink],
-  selector: 'app-employee-detail',
-  styleUrl: './employee-detail.css',
-  templateUrl: './employee-detail.html',
+  selector: "app-employee-detail",
+  styleUrl: "./employee-detail.css",
+  templateUrl: "./employee-detail.html",
 })
 export class EmployeeDetail {
   // Le paramètre :id de l'adresse /equipe/:id (withComponentInputBinding).
   readonly id = input.required<string>();
 
   // Relancée si l'id change (passage d'une fiche à une autre).
-  protected readonly employee = httpResource<Employee>(() => `/api/employees/${this.id()}`);
+  protected readonly employee = httpResource<Employee>(
+    () => `/api/employees/${this.id()}`,
+  );
 
   // 404 : l'identifiant n'existe pas. On le distingue d'une panne du serveur.
   protected readonly notFound = computed(() => {
@@ -1954,28 +2021,27 @@ Un paramètre d'adresse est toujours du **texte** : `id` est un `string`, même 
 <p><a routerLink="/equipe">Retour à l'équipe</a></p>
 
 @if (employee.isLoading()) {
-  <p>Chargement de la fiche...</p>
+<p>Chargement de la fiche...</p>
 } @else if (notFound()) {
-  <h1>Collègue introuvable</h1>
-  <p>Aucun collègue ne porte l'identifiant {{ id() }}.</p>
+<h1>Collègue introuvable</h1>
+<p>Aucun collègue ne porte l'identifiant {{ id() }}.</p>
 } @else if (employee.error()) {
-  <h1>Fiche indisponible</h1>
-  <p class="error">Impossible de charger la fiche. Réessayez plus tard.</p>
-} @else if (employee.hasValue()) {
-  @let e = employee.value();
-  <h1>{{ e.firstName }} {{ e.lastName }}</h1>
-  <dl>
-    <dt>Poste</dt>
-    <dd>{{ e.job }}</dd>
-    <dt>Service</dt>
-    <dd>{{ e.department }}</dd>
-    <dt>E-mail</dt>
-    <dd>
-      <a [href]="'mailto:' + e.email">{{ e.email }}</a>
-    </dd>
-    <dt>Lieu de travail</dt>
-    <dd>{{ e.remote ? 'En télétravail' : 'Sur site' }}</dd>
-  </dl>
+<h1>Fiche indisponible</h1>
+<p class="error">Impossible de charger la fiche. Réessayez plus tard.</p>
+} @else if (employee.hasValue()) { @let e = employee.value();
+<h1>{{ e.firstName }} {{ e.lastName }}</h1>
+<dl>
+  <dt>Poste</dt>
+  <dd>{{ e.job }}</dd>
+  <dt>Service</dt>
+  <dd>{{ e.department }}</dd>
+  <dt>E-mail</dt>
+  <dd>
+    <a [href]="'mailto:' + e.email">{{ e.email }}</a>
+  </dd>
+  <dt>Lieu de travail</dt>
+  <dd>{{ e.remote ? 'En télétravail' : 'Sur site' }}</dd>
+</dl>
 }
 ```
 
@@ -2022,12 +2088,12 @@ dd {
 5. Le nom sur chaque carte devient un lien vers la fiche. Dans `employee-card.ts`, importez `RouterLink` depuis `@angular/router` et ajoutez-le aux `imports` du composant. Dans `employee-card.html`, remplacez le `<h3>` :
 
 ```html
-  <h3 class="card__name">
-    <!-- Le nom mène à la fiche : /equipe/12 -->
-    <a [routerLink]="['/equipe', employee().id]">
-      {{ employee().firstName }} {{ employee().lastName }}
-    </a>
-  </h3>
+<h3 class="card__name">
+  <!-- Le nom mène à la fiche : /equipe/12 -->
+  <a [routerLink]="['/equipe', employee().id]">
+    {{ employee().firstName }} {{ employee().lastName }}
+  </a>
+</h3>
 ```
 
 `['/equipe', 12]` : le routeur assemble l'adresse `/equipe/12`.
@@ -2060,15 +2126,15 @@ ng generate service api/employee-api
 `src/app/api/employee-api.ts` :
 
 ```ts
-import { HttpClient } from '@angular/common/http';
-import { Service, inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Employee } from '../models/employee';
+import { HttpClient } from "@angular/common/http";
+import { Service, inject } from "@angular/core";
+import { Observable } from "rxjs";
+import { Employee } from "../models/employee";
 
 // Un collègue sans id : c'est le serveur qui choisit l'identifiant.
-export type EmployeeDraft = Omit<Employee, 'id'>;
+export type EmployeeDraft = Omit<Employee, "id">;
 
-const API_URL = '/api/employees';
+const API_URL = "/api/employees";
 
 // Les actions sur les collègues. Les listes, elles, sont lues avec httpResource.
 @Service()
@@ -2098,9 +2164,9 @@ Les quatre méthodes sont écrites d'un coup : les modules 20 et 21 s'en serviro
 2. Remplacez **tout** le contenu de `src/app/pages/add-employee/add-employee.ts` :
 
 ```ts
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, inject, signal } from "@angular/core";
+import { toSignal } from "@angular/core/rxjs-interop";
 import {
   FormField,
   FormRoot,
@@ -2110,28 +2176,28 @@ import {
   maxLength,
   minLength,
   required,
-} from '@angular/forms/signals';
-import { MatButton } from '@angular/material/button';
-import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
-import { apiErrorMessage } from '../../api/api-error';
-import { DepartmentApi } from '../../api/department-api';
-import { EmployeeApi, EmployeeDraft } from '../../api/employee-api';
+} from "@angular/forms/signals";
+import { MatButton } from "@angular/material/button";
+import { Router } from "@angular/router";
+import { firstValueFrom } from "rxjs";
+import { apiErrorMessage } from "../../api/api-error";
+import { DepartmentApi } from "../../api/department-api";
+import { EmployeeApi, EmployeeDraft } from "../../api/employee-api";
 
 const EMPTY_DRAFT: EmployeeDraft = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  job: '',
-  department: 'Informatique',
+  firstName: "",
+  lastName: "",
+  email: "",
+  job: "",
+  department: "Informatique",
   remote: false,
 };
 
 @Component({
   imports: [FormField, FormRoot, MatButton],
-  selector: 'app-add-employee',
-  styleUrl: './add-employee.css',
-  templateUrl: './add-employee.html',
+  selector: "app-add-employee",
+  styleUrl: "./add-employee.css",
+  templateUrl: "./add-employee.html",
 })
 export class AddEmployee {
   private readonly api = inject(EmployeeApi);
@@ -2139,22 +2205,29 @@ export class AddEmployee {
   private readonly router = inject(Router);
 
   // La liste des services vient de l'API : Observable -> signal.
-  protected readonly departments = toSignal(this.departmentApi.getNames(), { initialValue: [] });
+  protected readonly departments = toSignal(this.departmentApi.getNames(), {
+    initialValue: [],
+  });
 
   private readonly draft = signal<EmployeeDraft>({ ...EMPTY_DRAFT });
 
   protected readonly employeeForm = form(
     this.draft,
     (path) => {
-      required(path.firstName, { message: 'Le prénom est obligatoire.' });
-      required(path.lastName, { message: 'Le nom est obligatoire.' });
-      minLength(path.lastName, 2, { message: 'Le nom doit contenir au moins 2 lettres.' });
+      required(path.firstName, { message: "Le prénom est obligatoire." });
+      required(path.lastName, { message: "Le nom est obligatoire." });
+      minLength(path.lastName, 2, {
+        message: "Le nom doit contenir au moins 2 lettres.",
+      });
       required(path.email, { message: "L'e-mail est obligatoire." });
       email(path.email, {
-        message: "L'e-mail n'est pas valide (exemple : prenom.nom@techcorp.fr).",
+        message:
+          "L'e-mail n'est pas valide (exemple : prenom.nom@techcorp.fr).",
       });
-      required(path.job, { message: 'Le poste est obligatoire.' });
-      maxLength(path.job, 40, { message: 'Le poste ne doit pas dépasser 40 caractères.' });
+      required(path.job, { message: "Le poste est obligatoire." });
+      maxLength(path.job, 40, {
+        message: "Le poste ne doit pas dépasser 40 caractères.",
+      });
     },
     {
       submission: {
@@ -2164,24 +2237,24 @@ export class AddEmployee {
   );
 
   // Erreur générale du serveur, affichée au-dessus des boutons.
-  protected readonly serverError = signal('');
+  protected readonly serverError = signal("");
 
   protected resetForm(): void {
     this.employeeForm().reset({ ...EMPTY_DRAFT });
   }
 
   private async save(): Promise<TreeValidationResult> {
-    this.serverError.set('');
+    this.serverError.set("");
     try {
       const created = await firstValueFrom(this.api.create(this.draft()));
       // Le serveur a choisi l'id : on affiche la fiche du nouveau collègue.
-      await this.router.navigate(['/equipe', created.id]);
+      await this.router.navigate(["/equipe", created.id]);
       return undefined;
     } catch (error) {
       // 409 : e-mail déjà utilisé. L'erreur est rattachée au champ e-mail.
       if (error instanceof HttpErrorResponse && error.status === 409) {
         return {
-          kind: 'server',
+          kind: "server",
           message: apiErrorMessage(error),
           fieldTree: this.employeeForm.email,
         };
@@ -2198,17 +2271,21 @@ export class AddEmployee {
 3. Dans `add-employee.html`, ajoutez au-dessus de `<div class="form__actions">` :
 
 ```html
-  @if (serverError()) {
-    <p class="alert" role="alert">{{ serverError() }}</p>
-  }
+@if (serverError()) {
+<p class="alert" role="alert">{{ serverError() }}</p>
+}
 ```
 
 Et désactivez le bouton pendant l'envoi :
 
 ```html
-    <button matButton="filled" type="submit" [disabled]="employeeForm().submitting()">
-      Ajouter
-    </button>
+<button
+  matButton="filled"
+  type="submit"
+  [disabled]="employeeForm().submitting()"
+>
+  Ajouter
+</button>
 ```
 
 4. Dans `add-employee.css`, ajoutez :
@@ -2324,16 +2401,22 @@ function toDraft(employee: Employee): EmployeeDraft {
 ```
 
 ```html
-  <div class="form__actions">
-    <button matButton="filled" type="submit" [disabled]="employeeForm().submitting()">
-      {{ id() ? 'Enregistrer' : 'Ajouter' }}
-    </button>
-    @if (id()) {
-      <a matButton="outlined" [routerLink]="['/equipe', id()]">Annuler</a>
-    } @else {
-      <button matButton="outlined" type="button" (click)="resetForm()">Effacer</button>
-    }
-  </div>
+<div class="form__actions">
+  <button
+    matButton="filled"
+    type="submit"
+    [disabled]="employeeForm().submitting()"
+  >
+    {{ id() ? 'Enregistrer' : 'Ajouter' }}
+  </button>
+  @if (id()) {
+  <a matButton="outlined" [routerLink]="['/equipe', id()]">Annuler</a>
+  } @else {
+  <button matButton="outlined" type="button" (click)="resetForm()">
+    Effacer
+  </button>
+  }
+</div>
 ```
 
 7. Ajoutez la route dans `app.routes.ts`, sous `ajouter`. Elle réutilise le **même** composant et les **mêmes** guards :
@@ -2355,12 +2438,14 @@ function toDraft(employee: Employee): EmployeeDraft {
 Dans `employee-detail.html`, après `</dl>` (toujours dans le bloc `hasValue()`) :
 
 ```html
-  <!-- Boutons masques aux employes : confort d'affichage, le serveur verifie aussi. -->
-  @if (auth.isAdmin()) {
-    <div class="actions">
-      <a matButton="outlined" [routerLink]="['/equipe', e.id, 'modifier']">Modifier</a>
-    </div>
-  }
+<!-- Boutons masques aux employes : confort d'affichage, le serveur verifie aussi. -->
+@if (auth.isAdmin()) {
+<div class="actions">
+  <a matButton="outlined" [routerLink]="['/equipe', e.id, 'modifier']"
+    >Modifier</a
+  >
+</div>
+}
 ```
 
 ### Vérifier
@@ -2386,15 +2471,15 @@ Le serveur a ses propres règles : un employé reçoit 403, et une administratri
 1. Dans `employee-detail.ts`, les imports deviennent :
 
 ```ts
-import { HttpErrorResponse, httpResource } from '@angular/common/http';
-import { Component, computed, inject, input, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { Router, RouterLink } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
-import { apiErrorMessage } from '../../api/api-error';
-import { EmployeeApi } from '../../api/employee-api';
-import { AuthStore } from '../../auth/auth-store';
-import { Employee } from '../../models/employee';
+import { HttpErrorResponse, httpResource } from "@angular/common/http";
+import { Component, computed, inject, input, signal } from "@angular/core";
+import { MatButton } from "@angular/material/button";
+import { Router, RouterLink } from "@angular/router";
+import { firstValueFrom } from "rxjs";
+import { apiErrorMessage } from "../../api/api-error";
+import { EmployeeApi } from "../../api/employee-api";
+import { AuthStore } from "../../auth/auth-store";
+import { Employee } from "../../models/employee";
 ```
 
 2. Dans la classe, ajoutez :
@@ -2430,23 +2515,24 @@ import { Employee } from '../../models/employee';
 3. Dans `employee-detail.html`, complétez le bloc des actions :
 
 ```html
-  @if (auth.isAdmin()) {
-    <div class="actions">
-      <a matButton="outlined" [routerLink]="['/equipe', e.id, 'modifier']">Modifier</a>
-      <button
-        matButton="filled"
-        type="button"
-        class="danger"
-        [disabled]="deleting()"
-        (click)="remove(e)"
-      >
-        {{ deleting() ? 'Suppression...' : 'Supprimer' }}
-      </button>
-    </div>
-  }
-  @if (actionError()) {
-    <p class="alert" role="alert">{{ actionError() }}</p>
-  }
+@if (auth.isAdmin()) {
+<div class="actions">
+  <a matButton="outlined" [routerLink]="['/equipe', e.id, 'modifier']"
+    >Modifier</a
+  >
+  <button
+    matButton="filled"
+    type="button"
+    class="danger"
+    [disabled]="deleting()"
+    (click)="remove(e)"
+  >
+    {{ deleting() ? 'Suppression...' : 'Supprimer' }}
+  </button>
+</div>
+} @if (actionError()) {
+<p class="alert" role="alert">{{ actionError() }}</p>
+}
 ```
 
 4. Dans `employee-detail.css`, un bouton rouge pour une action destructrice :
@@ -2474,6 +2560,7 @@ import { Employee } from '../../models/employee';
 2. Ajoutez une liste "Trier par" : nom, prénom ou service.
 
 Indices :
+
 - deux signals, `department` (`''` pour tous) et `sort` ;
 - json-server filtre avec `?department=Finance` et trie avec `?_sort=firstName` ;
 - pour n'envoyer `department` que s'il est choisi : `...(this.department() ? { department: this.department() } : {})` dans `params` ;
@@ -2507,8 +2594,8 @@ ng generate interface models/leave
 `src/app/models/leave.ts` :
 
 ```ts
-export type LeaveType = 'paid' | 'rtt' | 'unpaid';
-export type LeaveStatus = 'pending' | 'approved' | 'rejected';
+export type LeaveType = "paid" | "rtt" | "unpaid";
+export type LeaveStatus = "pending" | "approved" | "rejected";
 
 // Une demande de congé, telle que renvoyée par GET /api/leaves.
 export interface Leave {
@@ -2533,15 +2620,15 @@ export interface NewLeave {
 
 // Libellés affichés à l'utilisateur.
 export const LEAVE_TYPE_LABELS: Record<LeaveType, string> = {
-  paid: 'Congés payés',
-  rtt: 'RTT',
-  unpaid: 'Sans solde',
+  paid: "Congés payés",
+  rtt: "RTT",
+  unpaid: "Sans solde",
 };
 
 export const LEAVE_STATUS_LABELS: Record<LeaveStatus, string> = {
-  pending: 'En attente',
-  approved: 'Acceptée',
-  rejected: 'Refusée',
+  pending: "En attente",
+  approved: "Acceptée",
+  rejected: "Refusée",
 };
 ```
 
@@ -2550,13 +2637,17 @@ export const LEAVE_STATUS_LABELS: Record<LeaveStatus, string> = {
 2. Pour afficher les dates en français ("2 nov. 2026"), enregistrez la langue dans `app.config.ts` :
 
 ```ts
-import { registerLocaleData } from '@angular/common';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import localeFr from '@angular/common/locales/fr';
-import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { routes } from './app.routes';
-import { authInterceptor } from './auth/auth.interceptor';
+import { registerLocaleData } from "@angular/common";
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import localeFr from "@angular/common/locales/fr";
+import {
+  ApplicationConfig,
+  LOCALE_ID,
+  provideBrowserGlobalErrorListeners,
+} from "@angular/core";
+import { provideRouter, withComponentInputBinding } from "@angular/router";
+import { routes } from "./app.routes";
+import { authInterceptor } from "./auth/auth.interceptor";
 
 // Noms des jours et des mois en français pour le pipe date.
 registerLocaleData(localeFr);
@@ -2568,7 +2659,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     // withComponentInputBinding : les paramètres d'URL arrivent dans les input().
     provideRouter(routes, withComponentInputBinding()),
-    { provide: LOCALE_ID, useValue: 'fr-FR' },
+    { provide: LOCALE_ID, useValue: "fr-FR" },
   ],
 };
 ```
@@ -2584,18 +2675,22 @@ ng generate component pages/leaves/leaves-page --flat
 `src/app/pages/leaves/leaves-page.ts` :
 
 ```ts
-import { DatePipe } from '@angular/common';
-import { httpResource } from '@angular/common/http';
-import { Component, computed, inject } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { AuthStore } from '../../auth/auth-store';
-import { LEAVE_STATUS_LABELS, LEAVE_TYPE_LABELS, Leave } from '../../models/leave';
+import { DatePipe } from "@angular/common";
+import { httpResource } from "@angular/common/http";
+import { Component, computed, inject } from "@angular/core";
+import { MatButton } from "@angular/material/button";
+import { AuthStore } from "../../auth/auth-store";
+import {
+  LEAVE_STATUS_LABELS,
+  LEAVE_TYPE_LABELS,
+  Leave,
+} from "../../models/leave";
 
 @Component({
   imports: [DatePipe, MatButton],
-  selector: 'app-leaves-page',
-  styleUrl: './leaves-page.css',
-  templateUrl: './leaves-page.html',
+  selector: "app-leaves-page",
+  styleUrl: "./leaves-page.css",
+  templateUrl: "./leaves-page.html",
 })
 export class LeavesPage {
   private readonly auth = inject(AuthStore);
@@ -2605,19 +2700,25 @@ export class LeavesPage {
 
   // employeeId : pour un employé, le serveur l'impose de toute façon (il lit le jeton).
   protected readonly leaves = httpResource<Leave[]>(() => ({
-    url: '/api/leaves',
-    params: { employeeId: this.auth.user()?.id ?? 0, _sort: 'startDate', _order: 'desc' },
+    url: "/api/leaves",
+    params: {
+      employeeId: this.auth.user()?.id ?? 0,
+      _sort: "startDate",
+      _order: "desc",
+    },
   }));
 
   // Calculés à partir de la réponse du serveur.
   protected readonly pendingCount = computed(() =>
-    this.leaves.hasValue() ? this.leaves.value().filter((l) => l.status === 'pending').length : 0,
+    this.leaves.hasValue()
+      ? this.leaves.value().filter((l) => l.status === "pending").length
+      : 0,
   );
   protected readonly approvedPaidDays = computed(() =>
     this.leaves.hasValue()
       ? this.leaves
           .value()
-          .filter((l) => l.type === 'paid' && l.status === 'approved')
+          .filter((l) => l.type === "paid" && l.status === "approved")
           .reduce((total, l) => total + l.days, 0)
       : 0,
   );
@@ -2635,56 +2736,57 @@ export class LeavesPage {
   <h2 id="list-title">Mes demandes</h2>
 
   <p aria-live="polite">
-    @if (leaves.isLoading()) {
-      Chargement des demandes...
-    } @else if (leaves.error()) {
-      Impossible de charger vos demandes.
-    } @else if (leaves.hasValue()) {
-      {{ pendingCount() }} demande(s) en attente, {{ approvedPaidDays() }} jour(s) de congés payés
-      acceptés.
-    }
+    @if (leaves.isLoading()) { Chargement des demandes... } @else if
+    (leaves.error()) { Impossible de charger vos demandes. } @else if
+    (leaves.hasValue()) { {{ pendingCount() }} demande(s) en attente, {{
+    approvedPaidDays() }} jour(s) de congés payés acceptés. }
   </p>
 
   @if (leaves.error()) {
-    <button matButton="outlined" type="button" (click)="leaves.reload()">Réessayer</button>
-  }
-
-  @if (leaves.hasValue()) {
-    <!-- Un tableau qui defile horizontalement sur mobile, sans faire deborder la page. -->
-    <div class="table-wrapper" tabindex="0" role="region" aria-labelledby="list-title">
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Du</th>
-            <th scope="col">Au</th>
-            <th scope="col">Jours</th>
-            <th scope="col">Statut</th>
-            <th scope="col"><span class="visually-hidden">Actions</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (leave of leaves.value(); track leave.id) {
-            <tr>
-              <td>{{ typeLabels[leave.type] }}</td>
-              <td>{{ leave.startDate | date: 'd MMM y' }}</td>
-              <td>{{ leave.endDate | date: 'd MMM y' }}</td>
-              <td>{{ leave.days }}</td>
-              <td>
-                <span class="status" [class]="'status--' + leave.status">
-                  {{ statusLabels[leave.status] }}
-                </span>
-              </td>
-              <td></td>
-            </tr>
-          } @empty {
-            <tr>
-              <td colspan="6">Aucune demande pour le moment.</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
+  <button matButton="outlined" type="button" (click)="leaves.reload()">
+    Réessayer
+  </button>
+  } @if (leaves.hasValue()) {
+  <!-- Un tableau qui defile horizontalement sur mobile, sans faire deborder la page. -->
+  <div
+    class="table-wrapper"
+    tabindex="0"
+    role="region"
+    aria-labelledby="list-title"
+  >
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Type</th>
+          <th scope="col">Du</th>
+          <th scope="col">Au</th>
+          <th scope="col">Jours</th>
+          <th scope="col">Statut</th>
+          <th scope="col"><span class="visually-hidden">Actions</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (leave of leaves.value(); track leave.id) {
+        <tr>
+          <td>{{ typeLabels[leave.type] }}</td>
+          <td>{{ leave.startDate | date: 'd MMM y' }}</td>
+          <td>{{ leave.endDate | date: 'd MMM y' }}</td>
+          <td>{{ leave.days }}</td>
+          <td>
+            <span class="status" [class]="'status--' + leave.status">
+              {{ statusLabels[leave.status] }}
+            </span>
+          </td>
+          <td></td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="6">Aucune demande pour le moment.</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
   }
 </section>
 ```
@@ -2766,9 +2868,13 @@ td {
 7. Dans `app.html`, ajoutez le lien dans le bloc `@if (auth.isLoggedIn())`, après "Équipe" :
 
 ```html
-        <a matButton routerLink="/conges" routerLinkActive="active" ariaCurrentWhenActive="page"
-          >Mes congés</a
-        >
+<a
+  matButton
+  routerLink="/conges"
+  routerLinkActive="active"
+  ariaCurrentWhenActive="page"
+  >Mes congés</a
+>
 ```
 
 ### Vérifier
@@ -2777,13 +2883,16 @@ td {
 - **Le serveur filtre** : dans la console, demandez les congés de Julien (id 2) avec le jeton de Claire :
 
 ```js
-const { token } = JSON.parse(sessionStorage.getItem('equipe.session'));
-fetch('/api/leaves?employeeId=2', { headers: { Authorization: 'Bearer ' + token } })
+const { token } = JSON.parse(sessionStorage.getItem("equipe.session"));
+fetch("/api/leaves?employeeId=2", {
+  headers: { Authorization: "Bearer " + token },
+})
   .then((response) => response.json())
   .then(console.log);
 ```
 
-  Vous recevez **les 4 demandes de Claire** (`employeeId: 1`). Le paramètre envoyé par le front n'est qu'une indication, le serveur décide à partir du jeton.
+Vous recevez **les 4 demandes de Claire** (`employeeId: 1`). Le paramètre envoyé par le front n'est qu'une indication, le serveur décide à partir du jeton.
+
 - En vue mobile (375 px), le tableau défile horizontalement, mais la page, elle, ne déborde pas.
 
 ---
@@ -2808,12 +2917,12 @@ ng generate service api/leave-api
 `src/app/api/leave-api.ts` :
 
 ```ts
-import { HttpClient } from '@angular/common/http';
-import { Service, inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Leave, NewLeave } from '../models/leave';
+import { HttpClient } from "@angular/common/http";
+import { Service, inject } from "@angular/core";
+import { Observable } from "rxjs";
+import { Leave, NewLeave } from "../models/leave";
 
-const API_URL = '/api/leaves';
+const API_URL = "/api/leaves";
 
 @Service()
 export class LeaveApi {
@@ -2832,16 +2941,28 @@ export class LeaveApi {
 2. Dans `leaves-page.ts`, les imports deviennent :
 
 ```ts
-import { DatePipe } from '@angular/common';
-import { httpResource } from '@angular/common/http';
-import { Component, computed, inject, signal } from '@angular/core';
-import { FormField, FormRoot, form, maxLength, required, validate } from '@angular/forms/signals';
-import { MatButton } from '@angular/material/button';
-import { firstValueFrom } from 'rxjs';
-import { apiErrorMessage } from '../../api/api-error';
-import { LeaveApi } from '../../api/leave-api';
-import { AuthStore } from '../../auth/auth-store';
-import { LEAVE_STATUS_LABELS, LEAVE_TYPE_LABELS, Leave, NewLeave } from '../../models/leave';
+import { DatePipe } from "@angular/common";
+import { httpResource } from "@angular/common/http";
+import { Component, computed, inject, signal } from "@angular/core";
+import {
+  FormField,
+  FormRoot,
+  form,
+  maxLength,
+  required,
+  validate,
+} from "@angular/forms/signals";
+import { MatButton } from "@angular/material/button";
+import { firstValueFrom } from "rxjs";
+import { apiErrorMessage } from "../../api/api-error";
+import { LeaveApi } from "../../api/leave-api";
+import { AuthStore } from "../../auth/auth-store";
+import {
+  LEAVE_STATUS_LABELS,
+  LEAVE_TYPE_LABELS,
+  Leave,
+  NewLeave,
+} from "../../models/leave";
 ```
 
 Ajoutez `FormField` et `FormRoot` aux `imports` du composant : `imports: [DatePipe, FormField, FormRoot, MatButton],`.
@@ -2849,7 +2970,12 @@ Ajoutez `FormField` et `FormRoot` aux `imports` du composant : `imports: [DatePi
 Au-dessus de `@Component`, les valeurs de départ du formulaire :
 
 ```ts
-const EMPTY_LEAVE: NewLeave = { type: 'paid', startDate: '', endDate: '', reason: '' };
+const EMPTY_LEAVE: NewLeave = {
+  type: "paid",
+  startDate: "",
+  endDate: "",
+  reason: "",
+};
 ```
 
 3. Dans la classe, ajoutez le service (`private readonly api = inject(LeaveApi);` sous `auth`), puis, sous `approvedPaidDays` :
@@ -2920,20 +3046,20 @@ Les dates au format `AAAA-MM-JJ` se comparent comme du texte : `'2026-12-01' < '
 Dans le tableau, remplacez la cellule vide `<td></td>` par le bouton d'annulation, affiché seulement pour une demande en attente :
 
 ```html
-              <td>
-                @if (leave.status === 'pending') {
-                  <button
-                    matButton
-                    type="button"
-                    [attr.aria-label]="
+<td>
+  @if (leave.status === 'pending') {
+  <button
+    matButton
+    type="button"
+    [attr.aria-label]="
                       'Annuler la demande du ' + (leave.startDate | date: 'd MMMM y')
                     "
-                    (click)="cancel(leave)"
-                  >
-                    Annuler
-                  </button>
-                }
-              </td>
+    (click)="cancel(leave)"
+  >
+    Annuler
+  </button>
+  }
+</td>
 ```
 
 Sans `aria-label`, un lecteur d'écran annoncerait plusieurs boutons "Annuler" identiques.
@@ -2944,8 +3070,7 @@ Enfin, à la fin du fichier, le formulaire :
 <section aria-labelledby="form-title">
   <h2 id="form-title">Nouvelle demande</h2>
 
-  @let startDate = leaveForm.startDate();
-  @let endDate = leaveForm.endDate();
+  @let startDate = leaveForm.startDate(); @let endDate = leaveForm.endDate();
   @let reason = leaveForm.reason();
 
   <form class="form" [formRoot]="leaveForm">
@@ -2970,7 +3095,9 @@ Enfin, à la fin du fichier, le formulaire :
         "
       />
       @if (startDate.touched() && startDate.invalid()) {
-        <p class="field__error" id="start-date-error">{{ startDate.errors()[0].message }}</p>
+      <p class="field__error" id="start-date-error">
+        {{ startDate.errors()[0].message }}
+      </p>
       }
     </div>
 
@@ -2984,7 +3111,9 @@ Enfin, à la fin du fichier, le formulaire :
         [attr.aria-describedby]="endDate.touched() && endDate.invalid() ? 'end-date-error' : null"
       />
       @if (endDate.touched() && endDate.invalid()) {
-        <p class="field__error" id="end-date-error">{{ endDate.errors()[0].message }}</p>
+      <p class="field__error" id="end-date-error">
+        {{ endDate.errors()[0].message }}
+      </p>
       }
     </div>
 
@@ -2997,12 +3126,18 @@ Enfin, à la fin du fichier, le formulaire :
         [attr.aria-describedby]="reason.touched() && reason.invalid() ? 'reason-error' : null"
       />
       @if (reason.touched() && reason.invalid()) {
-        <p class="field__error" id="reason-error">{{ reason.errors()[0].message }}</p>
+      <p class="field__error" id="reason-error">
+        {{ reason.errors()[0].message }}
+      </p>
       }
     </div>
 
     <div>
-      <button matButton="filled" type="submit" [disabled]="leaveForm().submitting()">
+      <button
+        matButton="filled"
+        type="submit"
+        [disabled]="leaveForm().submitting()"
+      >
         {{ leaveForm().submitting() ? 'Envoi...' : 'Envoyer la demande' }}
       </button>
     </div>
@@ -3049,7 +3184,7 @@ select {
   color: #b91c1c;
 }
 
-[aria-invalid='true'] {
+[aria-invalid="true"] {
   border-color: #b91c1c;
 }
 ```
@@ -3074,6 +3209,7 @@ Le paragraphe `role="status"` est **toujours présent** dans la page, même vide
 2. Affichez le solde : "Solde restant : N jour(s)", sur la base de 25 jours de congés payés par an, moins les jours acceptés **et** en attente.
 
 Indices :
+
 - un signal `statusFilter` et un `computed` `visibleLeaves` qui filtre `leaves.value()` ; le `@for` parcourt `visibleLeaves()` ;
 - pour le solde, un `computed` avec `filter` (type `paid`, statut différent de `rejected`) et `reduce`. Claire doit avoir 1 jour restant.
 
@@ -3102,32 +3238,32 @@ Créez une page **"Demandes à traiter"** (`/demandes`), réservée à l'adminis
 
 ## Ce que vous retrouverez dans TechCorp RH
 
-| Ce TP | Le projet fil rouge |
-|---|---|
-| `DepartmentApi`, `toSignal` (modules 6, 7) | Les services d'accès à l'API (jour 4) |
-| `httpResource` (modules 8, 16, 18, 22) | `EmployeeDirectory`, `LeaveStore` (jour 4) |
+| Ce TP                                                       | Le projet fil rouge                                    |
+| ----------------------------------------------------------- | ------------------------------------------------------ |
+| `DepartmentApi`, `toSignal` (modules 6, 7)                  | Les services d'accès à l'API (jour 4)                  |
+| `httpResource` (modules 8, 16, 18, 22)                      | `EmployeeDirectory`, `LeaveStore` (jour 4)             |
 | `HttpClient` + `firstValueFrom` pour agir (modules 19 à 23) | Création et annulation d'une demande de congé (jour 4) |
-| `AuthStore`, page de connexion (modules 9, 10, 13) | `Session`, page de connexion (jour 5) |
-| `authInterceptor` (modules 11, 15) | `authInterceptor` (jour 5) |
-| `authGuard`, `adminGuard` (modules 12, 14) | `authGuard`, `teamAccessGuard` (jours 3 et 5) |
-| La fausse API json-server | L'API NestJS avec JWT et bcrypt (jour 5) |
+| `AuthStore`, page de connexion (modules 9, 10, 13)          | `Session`, page de connexion (jour 5)                  |
+| `authInterceptor` (modules 11, 15)                          | `authInterceptor` (jour 5)                             |
+| `authGuard`, `adminGuard` (modules 12, 14)                  | `authGuard`, `teamAccessGuard` (jours 3 et 5)          |
+| La fausse API json-server                                   | L'API NestJS avec JWT et bcrypt (jour 5)               |
 
 ---
 
 ## Erreurs fréquentes
 
-| Symptôme | Cause probable | Solution |
-|---|---|---|
-| Erreur 502 sur `/api/...`, `http proxy error ... ECONNREFUSED` dans le terminal Angular | L'API n'est pas lancée | `npm start` dans `api-mock-equipe` |
-| Erreur 404 sur `/api/...` en `GET` | Proxy non pris en compte | Vérifier `proxy.conf.json` et `angular.json`, puis **redémarrer** `npm start` |
-| `NullInjectorError: No provider for HttpClient` | `provideHttpClient()` absent de `app.config.ts` | L'ajouter (module 5) |
-| 401 sur toutes les routes protégées alors qu'on est connecté | Intercepteur non branché, ou jeton envoyé sans `Bearer ` | `withInterceptors([authInterceptor])`, vérifier l'en-tête dans l'onglet Réseau |
-| Déconnecté à chaque `F5` | Session non sauvegardée | Module 13 : `readSession()` et `saveSession()` |
-| Renvoyé sur la connexion après un redémarrage de l'API | Comportement normal : l'API a oublié les jetons | Se reconnecter |
-| Aucune requête ne part | `subscribe` oublié sur un Observable de `HttpClient` | S'abonner, ou utiliser `toSignal` / `firstValueFrom` |
-| `NG0950: Input "id" is required but no value is available yet` | `withComponentInputBinding()` absent | L'ajouter à `provideRouter` (module 12) |
-| `this.leaves.value()` lève une erreur | Lecture de `value()` alors que la requête a échoué | Tester `hasValue()` avant |
-| Le formulaire s'envoie mais la liste ne change pas | Liste non rechargée | `this.leaves.reload()` après l'action |
-| 403 "Action réservée aux administrateurs RH." | Connecté avec un compte employé | Se connecter avec `sarah.lefevre@techcorp.fr` |
-| La page déborde en largeur sur mobile | Tableau sans conteneur défilant | `.table-wrapper { position: relative; overflow-x: auto; }` |
-| Port 3000 déjà utilisé | L'API du jour 4 (`api-mock`) tourne déjà | L'arrêter avant de lancer `api-mock-equipe` |
+| Symptôme                                                                                | Cause probable                                           | Solution                                                                       |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Erreur 502 sur `/api/...`, `http proxy error ... ECONNREFUSED` dans le terminal Angular | L'API n'est pas lancée                                   | `npm start` dans `api-mock-equipe`                                             |
+| Erreur 404 sur `/api/...` en `GET`                                                      | Proxy non pris en compte                                 | Vérifier `proxy.conf.json` et `angular.json`, puis **redémarrer** `npm start`  |
+| `NullInjectorError: No provider for HttpClient`                                         | `provideHttpClient()` absent de `app.config.ts`          | L'ajouter (module 5)                                                           |
+| 401 sur toutes les routes protégées alors qu'on est connecté                            | Intercepteur non branché, ou jeton envoyé sans `Bearer ` | `withInterceptors([authInterceptor])`, vérifier l'en-tête dans l'onglet Réseau |
+| Déconnecté à chaque `F5`                                                                | Session non sauvegardée                                  | Module 13 : `readSession()` et `saveSession()`                                 |
+| Renvoyé sur la connexion après un redémarrage de l'API                                  | Comportement normal : l'API a oublié les jetons          | Se reconnecter                                                                 |
+| Aucune requête ne part                                                                  | `subscribe` oublié sur un Observable de `HttpClient`     | S'abonner, ou utiliser `toSignal` / `firstValueFrom`                           |
+| `NG0950: Input "id" is required but no value is available yet`                          | `withComponentInputBinding()` absent                     | L'ajouter à `provideRouter` (module 12)                                        |
+| `this.leaves.value()` lève une erreur                                                   | Lecture de `value()` alors que la requête a échoué       | Tester `hasValue()` avant                                                      |
+| Le formulaire s'envoie mais la liste ne change pas                                      | Liste non rechargée                                      | `this.leaves.reload()` après l'action                                          |
+| 403 "Action réservée aux administrateurs RH."                                           | Connecté avec un compte employé                          | Se connecter avec `sarah.lefevre@techcorp.fr`                                  |
+| La page déborde en largeur sur mobile                                                   | Tableau sans conteneur défilant                          | `.table-wrapper { position: relative; overflow-x: auto; }`                     |
+| Port 3000 déjà utilisé                                                                  | L'API du jour 4 (`api-mock`) tourne déjà                 | L'arrêter avant de lancer `api-mock-equipe`                                    |

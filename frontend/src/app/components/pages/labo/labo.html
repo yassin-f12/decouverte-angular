@@ -1,0 +1,48 @@
+<h1>Laboratoire de l'asynchronisme</h1>
+
+<section aria-labelledby="order-title">
+  <h2 id="order-title">1. L'ordre d'exécution</h2>
+  <div class="actions">
+    <button matButton="outlined" type="button" (click)="runTimeout()">Lancer setTimeout</button>
+  </div>
+  <button matButton="outlined" type="button" (click)="runOperators()">Lancer of + pipe</button>
+
+  <ol class="logs" aria-live="polite">
+    @for (line of logs(); track $index) {
+      <li>{{ line }}</li>
+    }
+  </ol>
+</section>
+
+<section aria-labelledby="promise-title">
+  <h2 id="promise-title">2. Une Promise avec async / await</h2>
+  <button matButton="filled" type="button" [disabled]="loading()" (click)="loadTip()">
+    Conseil du jour
+  </button>
+  <!-- aria-busy : le lecteur d'ecran sait que la zone est en cours de mise a jour. -->
+  <p aria-live="polite" [attr.aria-busy]="loading()">
+    @if (loading()) {
+      Chargement...
+    } @else {
+      {{ tip() }}
+    }
+  </p>
+</section>
+
+<section aria-labelledby="chrono-title">
+  <h2 id="chrono-title">3. Un Observable : le chronomètre</h2>
+  <p>Secondes écoulées : {{ seconds() }}</p>
+  <div class="actions">
+    <button matButton="filled" type="button" [disabled]="running()" (click)="startChrono()">
+      Démarrer
+    </button>
+    <button matButton="outlined" type="button" [disabled]="!running()" (click)="stopChrono()">
+      Arrêter
+    </button>
+  </div>
+</section>
+
+<section aria-labelledby="clock-title">
+  <h2 id="clock-title">4. Un Observable dans un signal : l'horloge</h2>
+  <p>Il est {{ now() | date: 'HH:mm:ss' }}</p>
+</section>
