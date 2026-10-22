@@ -1,0 +1,893 @@
+{
+  "departments": [
+    {
+      "id": 1,
+      "name": "Informatique",
+      "floor": 3
+    },
+    {
+      "id": 2,
+      "name": "Ressources humaines",
+      "floor": 1
+    },
+    {
+      "id": 3,
+      "name": "Commercial",
+      "floor": 2
+    },
+    {
+      "id": 4,
+      "name": "Marketing",
+      "floor": 2
+    },
+    {
+      "id": 5,
+      "name": "Finance",
+      "floor": 1
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "firstName": "Claire",
+      "lastName": "Martin",
+      "email": "claire.martin@techcorp.fr",
+      "job": "Développeuse front-end",
+      "department": "Informatique",
+      "remote": true
+    },
+    {
+      "id": 2,
+      "firstName": "Julien",
+      "lastName": "Bernard",
+      "email": "julien.bernard@techcorp.fr",
+      "job": "Chef de projet",
+      "department": "Informatique",
+      "remote": false
+    },
+    {
+      "id": 3,
+      "firstName": "Sarah",
+      "lastName": "Lefèvre",
+      "email": "sarah.lefevre@techcorp.fr",
+      "job": "Responsable RH",
+      "department": "Ressources humaines",
+      "remote": false
+    },
+    {
+      "id": 4,
+      "firstName": "Marc",
+      "lastName": "Dubois",
+      "email": "marc.dubois@techcorp.fr",
+      "job": "Directeur technique",
+      "department": "Informatique",
+      "remote": false
+    },
+    {
+      "id": 5,
+      "firstName": "Inès",
+      "lastName": "Haddad",
+      "email": "ines.haddad@techcorp.fr",
+      "job": "Développeuse back-end",
+      "department": "Informatique",
+      "remote": true
+    },
+    {
+      "id": 6,
+      "firstName": "Thomas",
+      "lastName": "Roux",
+      "email": "thomas.roux@techcorp.fr",
+      "job": "Administrateur systèmes",
+      "department": "Informatique",
+      "remote": false
+    },
+    {
+      "id": 7,
+      "firstName": "Léa",
+      "lastName": "Moreau",
+      "email": "lea.moreau@techcorp.fr",
+      "job": "Développeuse full-stack",
+      "department": "Informatique",
+      "remote": true
+    },
+    {
+      "id": 8,
+      "firstName": "Karim",
+      "lastName": "Diallo",
+      "email": "karim.diallo@techcorp.fr",
+      "job": "Technicien support",
+      "department": "Informatique",
+      "remote": false
+    },
+    {
+      "id": 9,
+      "firstName": "Emma",
+      "lastName": "Petit",
+      "email": "emma.petit@techcorp.fr",
+      "job": "Designer UX",
+      "department": "Informatique",
+      "remote": true
+    },
+    {
+      "id": 10,
+      "firstName": "Hugo",
+      "lastName": "Lambert",
+      "email": "hugo.lambert@techcorp.fr",
+      "job": "Développeur mobile",
+      "department": "Informatique",
+      "remote": true
+    },
+    {
+      "id": 11,
+      "firstName": "Nadia",
+      "lastName": "Benali",
+      "email": "nadia.benali@techcorp.fr",
+      "job": "Chargée de recrutement",
+      "department": "Ressources humaines",
+      "remote": false
+    },
+    {
+      "id": 12,
+      "firstName": "Paul",
+      "lastName": "Garnier",
+      "email": "paul.garnier@techcorp.fr",
+      "job": "Gestionnaire de paie",
+      "department": "Ressources humaines",
+      "remote": false
+    },
+    {
+      "id": 13,
+      "firstName": "Camille",
+      "lastName": "Faure",
+      "email": "camille.faure@techcorp.fr",
+      "job": "Chargée de formation",
+      "department": "Ressources humaines",
+      "remote": true
+    },
+    {
+      "id": 14,
+      "firstName": "Antoine",
+      "lastName": "Mercier",
+      "email": "antoine.mercier@techcorp.fr",
+      "job": "Directeur commercial",
+      "department": "Commercial",
+      "remote": false
+    },
+    {
+      "id": 15,
+      "firstName": "Manon",
+      "lastName": "Blanc",
+      "email": "manon.blanc@techcorp.fr",
+      "job": "Commerciale grands comptes",
+      "department": "Commercial",
+      "remote": false
+    },
+    {
+      "id": 16,
+      "firstName": "Yanis",
+      "lastName": "Chevalier",
+      "email": "yanis.chevalier@techcorp.fr",
+      "job": "Commercial sédentaire",
+      "department": "Commercial",
+      "remote": true
+    },
+    {
+      "id": 17,
+      "firstName": "Chloé",
+      "lastName": "Robin",
+      "email": "chloe.robin@techcorp.fr",
+      "job": "Assistante commerciale",
+      "department": "Commercial",
+      "remote": false
+    },
+    {
+      "id": 18,
+      "firstName": "Lucas",
+      "lastName": "Fontaine",
+      "email": "lucas.fontaine@techcorp.fr",
+      "job": "Ingénieur avant-vente",
+      "department": "Commercial",
+      "remote": true
+    },
+    {
+      "id": 19,
+      "firstName": "Sofia",
+      "lastName": "Rossi",
+      "email": "sofia.rossi@techcorp.fr",
+      "job": "Commerciale export",
+      "department": "Commercial",
+      "remote": false
+    },
+    {
+      "id": 20,
+      "firstName": "Mathis",
+      "lastName": "Girard",
+      "email": "mathis.girard@techcorp.fr",
+      "job": "Responsable marketing",
+      "department": "Marketing",
+      "remote": false
+    },
+    {
+      "id": 21,
+      "firstName": "Jade",
+      "lastName": "Nguyen",
+      "email": "jade.nguyen@techcorp.fr",
+      "job": "Chargée de communication",
+      "department": "Marketing",
+      "remote": true
+    },
+    {
+      "id": 22,
+      "firstName": "Rayan",
+      "lastName": "Bouvier",
+      "email": "rayan.bouvier@techcorp.fr",
+      "job": "Community manager",
+      "department": "Marketing",
+      "remote": true
+    },
+    {
+      "id": 23,
+      "firstName": "Louise",
+      "lastName": "André",
+      "email": "louise.andre@techcorp.fr",
+      "job": "Graphiste",
+      "department": "Marketing",
+      "remote": false
+    },
+    {
+      "id": 24,
+      "firstName": "Nathan",
+      "lastName": "Perrin",
+      "email": "nathan.perrin@techcorp.fr",
+      "job": "Chargé de contenus",
+      "department": "Marketing",
+      "remote": true
+    },
+    {
+      "id": 25,
+      "firstName": "Zoé",
+      "lastName": "Lemoine",
+      "email": "zoe.lemoine@techcorp.fr",
+      "job": "Directrice financière",
+      "department": "Finance",
+      "remote": false
+    },
+    {
+      "id": 26,
+      "firstName": "Adam",
+      "lastName": "Morel",
+      "email": "adam.morel@techcorp.fr",
+      "job": "Comptable",
+      "department": "Finance",
+      "remote": false
+    },
+    {
+      "id": 27,
+      "firstName": "Lina",
+      "lastName": "Gauthier",
+      "email": "lina.gauthier@techcorp.fr",
+      "job": "Contrôleuse de gestion",
+      "department": "Finance",
+      "remote": true
+    },
+    {
+      "id": 28,
+      "firstName": "Gabriel",
+      "lastName": "Masson",
+      "email": "gabriel.masson@techcorp.fr",
+      "job": "Acheteur",
+      "department": "Finance",
+      "remote": false
+    },
+    {
+      "id": 29,
+      "firstName": "Alice",
+      "lastName": "Renard",
+      "email": "alice.renard@techcorp.fr",
+      "job": "Assistante comptable",
+      "department": "Finance",
+      "remote": false
+    },
+    {
+      "id": 30,
+      "firstName": "Victor",
+      "lastName": "Colin",
+      "email": "victor.colin@techcorp.fr",
+      "job": "Testeur logiciel",
+      "department": "Informatique",
+      "remote": true
+    },
+    {
+      "id": 31,
+      "firstName": "Elsa",
+      "lastName": "Barbier",
+      "email": "elsa.barbier@techcorp.fr",
+      "job": "Data analyst",
+      "department": "Informatique",
+      "remote": true
+    },
+    {
+      "id": 32,
+      "firstName": "Noah",
+      "lastName": "Arnaud",
+      "email": "noah.arnaud@techcorp.fr",
+      "job": "Stagiaire développeur",
+      "department": "Informatique",
+      "remote": false
+    }
+  ],
+  "leaves": [
+    {
+      "id": 1,
+      "employeeId": 1,
+      "type": "paid",
+      "startDate": "2026-08-03",
+      "endDate": "2026-08-14",
+      "days": 10,
+      "reason": "Vacances d'été",
+      "status": "approved",
+      "createdAt": "2026-07-03T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "employeeId": 27,
+      "type": "rtt",
+      "startDate": "2026-08-24",
+      "endDate": "2026-08-24",
+      "days": 1,
+      "reason": "Rendez-vous personnel",
+      "status": "approved",
+      "createdAt": "2026-07-30T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "employeeId": 25,
+      "type": "rtt",
+      "startDate": "2026-09-07",
+      "endDate": "2026-09-08",
+      "days": 2,
+      "reason": "",
+      "status": "approved",
+      "createdAt": "2026-08-21T00:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "employeeId": 2,
+      "type": "paid",
+      "startDate": "2026-09-14",
+      "endDate": "2026-09-18",
+      "days": 5,
+      "reason": "Voyage",
+      "status": "approved",
+      "createdAt": "2026-08-10T00:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "employeeId": 18,
+      "type": "paid",
+      "startDate": "2026-09-16",
+      "endDate": "2026-09-24",
+      "days": 7,
+      "reason": "Voyage",
+      "status": "approved",
+      "createdAt": "2026-08-19T00:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "employeeId": 32,
+      "type": "paid",
+      "startDate": "2026-09-16",
+      "endDate": "2026-09-21",
+      "days": 4,
+      "reason": "",
+      "status": "approved",
+      "createdAt": "2026-08-30T00:00:00.000Z"
+    },
+    {
+      "id": 7,
+      "employeeId": 24,
+      "type": "paid",
+      "startDate": "2026-09-18",
+      "endDate": "2026-09-24",
+      "days": 5,
+      "reason": "Voyage",
+      "status": "approved",
+      "createdAt": "2026-09-08T00:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "employeeId": 11,
+      "type": "paid",
+      "startDate": "2026-09-23",
+      "endDate": "2026-09-28",
+      "days": 4,
+      "reason": "Mariage d'un proche",
+      "status": "approved",
+      "createdAt": "2026-09-13T00:00:00.000Z"
+    },
+    {
+      "id": 9,
+      "employeeId": 17,
+      "type": "paid",
+      "startDate": "2026-09-29",
+      "endDate": "2026-09-30",
+      "days": 2,
+      "reason": "Voyage",
+      "status": "approved",
+      "createdAt": "2026-08-21T00:00:00.000Z"
+    },
+    {
+      "id": 10,
+      "employeeId": 6,
+      "type": "unpaid",
+      "startDate": "2026-09-30",
+      "endDate": "2026-10-07",
+      "days": 6,
+      "reason": "Projet personnel",
+      "status": "approved",
+      "createdAt": "2026-09-18T00:00:00.000Z"
+    },
+    {
+      "id": 11,
+      "employeeId": 8,
+      "type": "paid",
+      "startDate": "2026-09-30",
+      "endDate": "2026-10-01",
+      "days": 2,
+      "reason": "Voyage",
+      "status": "approved",
+      "createdAt": "2026-08-28T00:00:00.000Z"
+    },
+    {
+      "id": 12,
+      "employeeId": 22,
+      "type": "paid",
+      "startDate": "2026-10-05",
+      "endDate": "2026-10-09",
+      "days": 5,
+      "reason": "Voyage",
+      "status": "approved",
+      "createdAt": "2026-09-10T00:00:00.000Z"
+    },
+    {
+      "id": 13,
+      "employeeId": 5,
+      "type": "paid",
+      "startDate": "2026-10-07",
+      "endDate": "2026-10-15",
+      "days": 7,
+      "reason": "Mariage d'un proche",
+      "status": "approved",
+      "createdAt": "2026-09-17T00:00:00.000Z"
+    },
+    {
+      "id": 14,
+      "employeeId": 1,
+      "type": "rtt",
+      "startDate": "2026-10-09",
+      "endDate": "2026-10-09",
+      "days": 1,
+      "reason": "Pont",
+      "status": "approved",
+      "createdAt": "2026-09-09T00:00:00.000Z"
+    },
+    {
+      "id": 15,
+      "employeeId": 4,
+      "type": "rtt",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-12",
+      "days": 1,
+      "reason": "Pont",
+      "status": "approved",
+      "createdAt": "2026-09-27T00:00:00.000Z"
+    },
+    {
+      "id": 16,
+      "employeeId": 4,
+      "type": "paid",
+      "startDate": "2026-10-19",
+      "endDate": "2026-10-23",
+      "days": 5,
+      "reason": "Vacances de la Toussaint",
+      "status": "rejected",
+      "createdAt": "2026-09-28T00:00:00.000Z"
+    },
+    {
+      "id": 17,
+      "employeeId": 8,
+      "type": "rtt",
+      "startDate": "2026-10-19",
+      "endDate": "2026-10-19",
+      "days": 1,
+      "reason": "Rendez-vous personnel",
+      "status": "approved",
+      "createdAt": "2026-09-21T00:00:00.000Z"
+    },
+    {
+      "id": 18,
+      "employeeId": 21,
+      "type": "unpaid",
+      "startDate": "2026-10-26",
+      "endDate": "2026-10-26",
+      "days": 1,
+      "reason": "Raisons familiales",
+      "status": "pending",
+      "createdAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": 19,
+      "employeeId": 9,
+      "type": "rtt",
+      "startDate": "2026-10-26",
+      "endDate": "2026-10-26",
+      "days": 1,
+      "reason": "Rendez-vous personnel",
+      "status": "pending",
+      "createdAt": "2026-09-25T00:00:00.000Z"
+    },
+    {
+      "id": 20,
+      "employeeId": 14,
+      "type": "paid",
+      "startDate": "2026-10-28",
+      "endDate": "2026-10-28",
+      "days": 1,
+      "reason": "Vacances de la Toussaint",
+      "status": "approved",
+      "createdAt": "2026-09-24T00:00:00.000Z"
+    },
+    {
+      "id": 21,
+      "employeeId": 1,
+      "type": "paid",
+      "startDate": "2026-11-02",
+      "endDate": "2026-11-06",
+      "days": 5,
+      "reason": "Vacances de la Toussaint",
+      "status": "pending",
+      "createdAt": "2026-09-25T00:00:00.000Z"
+    },
+    {
+      "id": 22,
+      "employeeId": 2,
+      "type": "rtt",
+      "startDate": "2026-11-12",
+      "endDate": "2026-11-13",
+      "days": 2,
+      "reason": "Pont",
+      "status": "rejected",
+      "createdAt": "2026-10-10T00:00:00.000Z"
+    },
+    {
+      "id": 23,
+      "employeeId": 5,
+      "type": "paid",
+      "startDate": "2026-11-16",
+      "endDate": "2026-11-18",
+      "days": 3,
+      "reason": "Voyage",
+      "status": "pending",
+      "createdAt": "2026-10-19T00:00:00.000Z"
+    },
+    {
+      "id": 24,
+      "employeeId": 4,
+      "type": "paid",
+      "startDate": "2026-11-17",
+      "endDate": "2026-11-19",
+      "days": 3,
+      "reason": "Mariage d'un proche",
+      "status": "rejected",
+      "createdAt": "2026-10-21T00:00:00.000Z"
+    },
+    {
+      "id": 25,
+      "employeeId": 4,
+      "type": "paid",
+      "startDate": "2026-11-17",
+      "endDate": "2026-11-25",
+      "days": 7,
+      "reason": "Vacances de la Toussaint",
+      "status": "pending",
+      "createdAt": "2026-10-29T00:00:00.000Z"
+    },
+    {
+      "id": 26,
+      "employeeId": 4,
+      "type": "paid",
+      "startDate": "2026-11-19",
+      "endDate": "2026-11-24",
+      "days": 4,
+      "reason": "",
+      "status": "approved",
+      "createdAt": "2026-10-16T00:00:00.000Z"
+    },
+    {
+      "id": 27,
+      "employeeId": 9,
+      "type": "paid",
+      "startDate": "2026-11-23",
+      "endDate": "2026-11-26",
+      "days": 4,
+      "reason": "Vacances de la Toussaint",
+      "status": "pending",
+      "createdAt": "2026-10-31T00:00:00.000Z"
+    },
+    {
+      "id": 28,
+      "employeeId": 6,
+      "type": "rtt",
+      "startDate": "2026-11-26",
+      "endDate": "2026-11-26",
+      "days": 1,
+      "reason": "",
+      "status": "pending",
+      "createdAt": "2026-10-27T00:00:00.000Z"
+    },
+    {
+      "id": 29,
+      "employeeId": 23,
+      "type": "paid",
+      "startDate": "2026-12-08",
+      "endDate": "2026-12-14",
+      "days": 5,
+      "reason": "Voyage",
+      "status": "pending",
+      "createdAt": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": 30,
+      "employeeId": 5,
+      "type": "paid",
+      "startDate": "2026-12-09",
+      "endDate": "2026-12-14",
+      "days": 4,
+      "reason": "Mariage d'un proche",
+      "status": "approved",
+      "createdAt": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": 31,
+      "employeeId": 19,
+      "type": "paid",
+      "startDate": "2026-12-11",
+      "endDate": "2026-12-17",
+      "days": 5,
+      "reason": "Vacances de la Toussaint",
+      "status": "approved",
+      "createdAt": "2026-11-22T00:00:00.000Z"
+    },
+    {
+      "id": 32,
+      "employeeId": 30,
+      "type": "paid",
+      "startDate": "2026-12-14",
+      "endDate": "2026-12-18",
+      "days": 5,
+      "reason": "Vacances en famille",
+      "status": "pending",
+      "createdAt": "2026-11-18T00:00:00.000Z"
+    },
+    {
+      "id": 33,
+      "employeeId": 22,
+      "type": "paid",
+      "startDate": "2026-12-14",
+      "endDate": "2026-12-16",
+      "days": 3,
+      "reason": "",
+      "status": "approved",
+      "createdAt": "2026-11-27T00:00:00.000Z"
+    },
+    {
+      "id": 34,
+      "employeeId": 29,
+      "type": "paid",
+      "startDate": "2026-12-14",
+      "endDate": "2026-12-15",
+      "days": 2,
+      "reason": "Voyage",
+      "status": "approved",
+      "createdAt": "2026-11-23T00:00:00.000Z"
+    },
+    {
+      "id": 35,
+      "employeeId": 7,
+      "type": "paid",
+      "startDate": "2026-12-18",
+      "endDate": "2026-12-25",
+      "days": 6,
+      "reason": "",
+      "status": "pending",
+      "createdAt": "2026-11-13T00:00:00.000Z"
+    },
+    {
+      "id": 36,
+      "employeeId": 1,
+      "type": "paid",
+      "startDate": "2026-12-21",
+      "endDate": "2026-12-31",
+      "days": 9,
+      "reason": "Congés de fin d'année",
+      "status": "pending",
+      "createdAt": "2026-11-18T00:00:00.000Z"
+    },
+    {
+      "id": 37,
+      "employeeId": 6,
+      "type": "rtt",
+      "startDate": "2026-12-21",
+      "endDate": "2026-12-21",
+      "days": 1,
+      "reason": "Déménagement",
+      "status": "approved",
+      "createdAt": "2026-11-13T00:00:00.000Z"
+    },
+    {
+      "id": 38,
+      "employeeId": 20,
+      "type": "paid",
+      "startDate": "2026-12-21",
+      "endDate": "2026-12-28",
+      "days": 6,
+      "reason": "",
+      "status": "rejected",
+      "createdAt": "2026-12-07T00:00:00.000Z"
+    },
+    {
+      "id": 39,
+      "employeeId": 28,
+      "type": "paid",
+      "startDate": "2026-12-23",
+      "endDate": "2026-12-31",
+      "days": 7,
+      "reason": "Vacances en famille",
+      "status": "approved",
+      "createdAt": "2026-12-03T00:00:00.000Z"
+    },
+    {
+      "id": 40,
+      "employeeId": 8,
+      "type": "rtt",
+      "startDate": "2026-12-23",
+      "endDate": "2026-12-24",
+      "days": 2,
+      "reason": "Rendez-vous personnel",
+      "status": "approved",
+      "createdAt": "2026-12-06T00:00:00.000Z"
+    },
+    {
+      "id": 41,
+      "employeeId": 5,
+      "type": "paid",
+      "startDate": "2026-12-23",
+      "endDate": "2026-12-28",
+      "days": 4,
+      "reason": "Mariage d'un proche",
+      "status": "pending",
+      "createdAt": "2026-11-15T00:00:00.000Z"
+    },
+    {
+      "id": 42,
+      "employeeId": 3,
+      "type": "paid",
+      "startDate": "2026-12-28",
+      "endDate": "2027-01-01",
+      "days": 5,
+      "reason": "Congés de fin d'année",
+      "status": "approved",
+      "createdAt": "2026-12-05T00:00:00.000Z"
+    },
+    {
+      "id": 43,
+      "employeeId": 25,
+      "type": "paid",
+      "startDate": "2026-12-30",
+      "endDate": "2027-01-04",
+      "days": 4,
+      "reason": "Vacances en famille",
+      "status": "approved",
+      "createdAt": "2026-12-12T00:00:00.000Z"
+    },
+    {
+      "id": 44,
+      "employeeId": 20,
+      "type": "rtt",
+      "startDate": "2027-01-04",
+      "endDate": "2027-01-05",
+      "days": 2,
+      "reason": "Rendez-vous personnel",
+      "status": "pending",
+      "createdAt": "2026-12-13T00:00:00.000Z"
+    },
+    {
+      "id": 45,
+      "employeeId": 8,
+      "type": "paid",
+      "startDate": "2027-01-06",
+      "endDate": "2027-01-11",
+      "days": 4,
+      "reason": "Vacances en famille",
+      "status": "rejected",
+      "createdAt": "2026-12-07T00:00:00.000Z"
+    },
+    {
+      "id": 46,
+      "employeeId": 17,
+      "type": "rtt",
+      "startDate": "2027-01-08",
+      "endDate": "2027-01-08",
+      "days": 1,
+      "reason": "Rendez-vous personnel",
+      "status": "pending",
+      "createdAt": "2026-12-27T00:00:00.000Z"
+    },
+    {
+      "id": 47,
+      "employeeId": 11,
+      "type": "paid",
+      "startDate": "2027-01-13",
+      "endDate": "2027-01-20",
+      "days": 6,
+      "reason": "Vacances de la Toussaint",
+      "status": "approved",
+      "createdAt": "2026-12-26T00:00:00.000Z"
+    },
+    {
+      "id": 48,
+      "employeeId": 10,
+      "type": "rtt",
+      "startDate": "2027-01-18",
+      "endDate": "2027-01-18",
+      "days": 1,
+      "reason": "Rendez-vous personnel",
+      "status": "approved",
+      "createdAt": "2027-01-08T00:00:00.000Z"
+    },
+    {
+      "id": 49,
+      "employeeId": 16,
+      "type": "rtt",
+      "startDate": "2027-01-21",
+      "endDate": "2027-01-22",
+      "days": 2,
+      "reason": "Déménagement",
+      "status": "approved",
+      "createdAt": "2026-12-27T00:00:00.000Z"
+    },
+    {
+      "id": 50,
+      "employeeId": 23,
+      "type": "paid",
+      "startDate": "2027-01-21",
+      "endDate": "2027-01-28",
+      "days": 6,
+      "reason": "Vacances en famille",
+      "status": "approved",
+      "createdAt": "2026-12-23T00:00:00.000Z"
+    },
+    {
+      "id": 51,
+      "employeeId": 31,
+      "type": "paid",
+      "startDate": "2027-01-27",
+      "endDate": "2027-01-28",
+      "days": 2,
+      "reason": "Vacances de la Toussaint",
+      "status": "rejected",
+      "createdAt": "2027-01-10T00:00:00.000Z"
+    },
+    {
+      "id": 52,
+      "employeeId": 2,
+      "type": "paid",
+      "startDate": "2027-02-15",
+      "endDate": "2027-02-26",
+      "days": 10,
+      "reason": "Vacances d'hiver",
+      "status": "pending",
+      "createdAt": "2027-01-16T00:00:00.000Z"
+    }
+  ]
+}

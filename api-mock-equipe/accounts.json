@@ -1,0 +1,20 @@
+[
+  {
+    "email": "claire.martin@techcorp.fr",
+    "password": "TechCorp2026!",
+    "employeeId": 1,
+    "role": "employee"
+  },
+  {
+    "email": "julien.bernard@techcorp.fr",
+    "password": "TechCorp2026!",
+    "employeeId": 2,
+    "role": "employee"
+  },
+  {
+    "email": "sarah.lefevre@techcorp.fr",
+    "password": "TechCorp2026!",
+    "employeeId": 3,
+    "role": "admin"
+  }
+]

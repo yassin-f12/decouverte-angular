@@ -1,0 +1,13 @@
+{
+  "name": "techcorp-equipe-api-mock",
+  "private": true,
+  "description": "Fausse API REST de TechCorp Equipe (TP 2 bonus) : connexion par jeton, collegues, services et conges.",
+  "scripts": {
+    "reset": "node -e \"require('fs').copyFileSync('seed.json', 'db.json')\"",
+    "start": "npm run reset && node server.cjs",
+    "start:keep": "node server.cjs"
+  },
+  "devDependencies": {
+    "json-server": "0.17.4"
+  }
+}
