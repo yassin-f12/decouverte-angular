@@ -11,16 +11,31 @@
       >
         Accueil
       </a>
-      <a matButton routerLink="/equipe" routerLinkActive="active" ariaCurrentWhenActive="page">
-        Équipe
-      </a>
-      <a matButton routerLink="/ajouter" routerLinkActive="active" ariaCurrentWhenActive="page">
-        Ajouter
-      </a>
+      <!-- Liens masques si l'utilisateur n'a pas acces : les guards protegent quand meme les routes. -->
+      @if (auth.isLoggedIn()) {
+        <a matButton routerLink="/equipe" routerLinkActive="active" ariaCurrentWhenActive="page"
+          >Équipe</a
+        >
+      }
+      @if (auth.isAdmin()) {
+        <a matButton routerLink="/ajouter" routerLinkActive="active" ariaCurrentWhenActive="page"
+          >Ajouter</a
+        >
+      }
       <a matButton routerLink="/labo" routerLinkActive="active" ariaCurrentWhenActive="page"
         >Labo</a
       >
     </nav>
+    <div class="session">
+      @if (auth.user(); as user) {
+        <a matButton routerLink="/compte" routerLinkActive="active" ariaCurrentWhenActive="page">
+          {{ user.firstName }} {{ user.lastName }}
+        </a>
+        <button matButton="outlined" type="button" (click)="logout()">Se déconnecter</button>
+      } @else {
+        <a matButton="filled" routerLink="/connexion">Se connecter</a>
+      }
+    </div>
   </mat-toolbar>
 </header>
 

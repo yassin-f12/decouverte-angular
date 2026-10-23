@@ -1,0 +1,11 @@
+dt {
+  font-weight: 700;
+}
+
+dd {
+  margin: 0 0 0.75rem;
+}
+
+.error {
+  color: #b91c1c;
+}

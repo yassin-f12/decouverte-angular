@@ -1,0 +1,66 @@
+<h1>Connexion</h1>
+@if (expiree()) {
+  <p class="info" role="status">Votre session a expiré. Reconnectez-vous pour continuer.</p>
+}
+
+@let emailField = loginForm.email(); @let password = loginForm.password();
+
+<form class="form" [formRoot]="loginForm">
+  <div class="field">
+    <label for="email">E-mail</label>
+    <!-- autocomplete : le navigateur et les gestionnaires de mots de passe remplissent le champ. -->
+    <input
+      id="email"
+      type="email"
+      autocomplete="username"
+      [formField]="loginForm.email"
+      [attr.aria-invalid]="emailField.touched() && emailField.invalid()"
+      [attr.aria-describedby]="emailField.touched() && emailField.invalid() ? 'email-error' : null"
+    />
+    @if (emailField.touched() && emailField.invalid()) {
+      <p class="field__error" id="email-error">
+        {{ emailField.errors()[0].message }}
+      </p>
+    }
+  </div>
+
+  <div class="field">
+    <label for="password">Mot de passe</label>
+    <input
+      id="password"
+      [type]="showPassword() ? 'text' : 'password'"
+      autocomplete="current-password"
+      [formField]="loginForm.password"
+      [attr.aria-invalid]="password.touched() && password.invalid()"
+      [attr.aria-describedby]="password.touched() && password.invalid() ? 'password-error' : null"
+    />
+    <button
+      mat-button
+      [attr.aria-pressed]="showPassword()"
+      type="button"
+      (click)="showPassword.update((value) => !value)"
+    >
+      {{ !showPassword() ? 'Afficher le mot de passe' : 'Masquer le mot de passe' }}
+    </button>
+    @if (password.touched() && password.invalid()) {
+      <p class="field__error" id="password-error">
+        {{ password.errors()[0].message }}
+      </p>
+    }
+  </div>
+
+  <!-- role="alert" : le lecteur d'ecran annonce l'erreur des qu'elle apparait. -->
+  @if (serverError()) {
+    <p class="alert" role="alert">{{ serverError() }}</p>
+  }
+
+  <!-- submitting() vaut true pendant l'action : on evite le double envoi. -->
+  <button matButton="filled" type="submit" [disabled]="loginForm().submitting()">
+    {{ loginForm().submitting() ? 'Connexion...' : 'Se connecter' }}
+  </button>
+</form>
+
+<p class="hint">
+  Comptes de test (mot de passe <code>TechCorp2026!</code>) : claire.martin@techcorp.fr (employée),
+  sarah.lefevre@techcorp.fr (administratrice RH).
+</p>

@@ -28,3 +28,10 @@ nav {
   margin: 0 auto;
   padding: 1rem;
 }
+
+nav,
+.session {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}

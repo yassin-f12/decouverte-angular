@@ -1,0 +1,16 @@
+<h1>Mon compte</h1>
+
+@if (me.isLoading()) {
+  <p>Chargement du profil...</p>
+} @else if (me.error()) {
+  <p class="error">Impossible de charger votre profil.</p>
+} @else if (me.hasValue()) {
+  <dl>
+    <dt>Nom</dt>
+    <dd>{{ me.value().firstName }} {{ me.value().lastName }}</dd>
+    <dt>E-mail</dt>
+    <dd>{{ me.value().email }}</dd>
+    <dt>Rôle</dt>
+    <dd>{{ me.value().role === 'admin' ? 'Administrateur RH' : 'Employé' }}</dd>
+  </dl>
+}
