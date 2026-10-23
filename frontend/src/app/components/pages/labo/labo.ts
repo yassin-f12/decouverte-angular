@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { MatButton } from '@angular/material/button';
-import { filter, interval, map, of, Subscription } from 'rxjs';
+import { filter, interval, map, Observable, of, Subscription, take } from 'rxjs';
 
 const TIPS = [
   "Lisez toujours le message d'erreur en entier.",
@@ -105,5 +105,70 @@ export class Labo {
         next: (n) => this.log('Valeur reçue : ' + n),
         complete: () => this.log('Terminé'),
       });
+  }
+
+  // défis de la phase 1
+  protected readonly goCofee = signal(false);
+  protected readonly countdown = signal(10);
+  protected readonly msgFinal = signal("C'est l'heure de la pause !");
+
+  protected startChronoCofee(): void {
+    this.countdown.set(9);
+    this.goCofee.set(true);
+
+    interval(1000)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        take(9),
+        map((n) => 8 - n),
+      )
+      .subscribe({
+        next: (n) => this.countdown.set(n),
+        complete: () => this.goCofee.set(false),
+      });
+  }
+
+  // niveau avancé du défi 1 partie 1
+  protected readonly performance = signal(0);
+  protected readonly performance2 = signal(0);
+
+  protected async perfo(): Promise<void> {
+    const debut = performance.now();
+    await wait(1000);
+    await wait(1000);
+    const fin = performance.now();
+
+    this.performance.set(Math.round(fin - debut));
+
+    const debut2 = performance.now();
+    await Promise.all([wait(1000), wait(1000)]);
+    const fin2 = performance.now();
+
+    this.performance2.set(Math.round(fin2 - debut2));
+  }
+
+  // niveau avancé du défi 1 partie 2 : observable
+  protected readonly monObservable = new Observable<string>((subscriber) => {
+    subscriber.next('Bonjour');
+    const pause = setTimeout(() => {
+      subscriber.next('Une seconde plus tard');
+      subscriber.complete();
+    }, 1000);
+
+    return () => {
+      clearTimeout(pause);
+      console.log('Nettoyage');
+    };
+  });
+
+  protected sub(): void {
+    this.monObservable.subscribe({
+      next: (message) => {
+        console.log(message);
+      },
+      complete: () => {
+        console.log("Fin du l'observable");
+      },
+    });
   }
 }

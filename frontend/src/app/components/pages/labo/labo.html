@@ -46,3 +46,19 @@
   <h2 id="clock-title">4. Un Observable dans un signal : l'horloge</h2>
   <p>Il est {{ now() | date: 'HH:mm:ss' }}</p>
 </section>
+
+<section aria-labelledby="cofee-title">
+  <h2 id="cofee-title">Défi de la phase 1</h2>
+  <button matButton="filled" type="button" [disabled]="goCofee()" (click)="startChronoCofee()">
+    Démarrer
+  </button>
+
+  {{ countdown() === 0 ? msgFinal() : 'Pause café dans ' + countdown() + 's' }}
+
+  <h2>Niveau avancé du défi</h2>
+  <button matButton="outlined" type="button" (click)="perfo()">Lancer les mesures</button>
+  <p>Attentes successives : {{ performance() }} ms</p>
+  <p>Promise.all : {{ performance2() }} ms</p>
+
+  <button matButton="filled" type="button" (click)="sub()">Lancer mon Observable</button>
+</section>
