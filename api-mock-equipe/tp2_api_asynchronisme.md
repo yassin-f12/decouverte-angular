@@ -491,7 +491,7 @@ Puis une dernière section :
 
 ---
 
-## Défis de la phase 1 -> _ta stoppé la_
+## Défis de la phase 1
 
 ### Intermédiaire
 
@@ -2311,7 +2311,7 @@ Et désactivez le bouton pendant l'envoi :
 
 ---
 
-## Module 20 - Modifier un collègue (20 min)
+## _Module 20 - Modifier un collègue (20 min) -> ta stoppé la_
 
 ### La notion
 
