@@ -1,15 +1,26 @@
-@if (employee(); as collegue) {
-  <div class="card">
-    <h1>{{ collegue.firstName }} {{ collegue.lastName }}</h1>
-    <p class="card__job">{{ collegue.job }}</p>
-    <p>{{ collegue.department }}</p>
-    <a [href]="'mailto:' + collegue.email">{{ collegue.email }}</a>
+<p><a routerLink="/equipe">Retour à l'équipe</a></p>
 
-    <app-status-badge [remote]="collegue.remote" />
-
-    <a matButton routerLink="/equipe">Retour à l'équipe</a>
-  </div>
-} @else {
-  <p>Collègue introuvable</p>
-  <a matButton routerLink="/equipe">Retour à l'équipe</a>
+@if (employee.isLoading()) {
+  <p>Chargement de la fiche...</p>
+} @else if (notFound()) {
+  <h1>Collègue introuvable</h1>
+  <p>Aucun collègue ne porte l'identifiant {{ id() }}.</p>
+} @else if (employee.error()) {
+  <h1>Fiche indisponible</h1>
+  <p class="error">Impossible de charger la fiche. Réessayez plus tard.</p>
+} @else if (employee.hasValue()) {
+  @let e = employee.value();
+  <h1>{{ e.firstName }} {{ e.lastName }}</h1>
+  <dl>
+    <dt>Poste</dt>
+    <dd>{{ e.job }}</dd>
+    <dt>Service</dt>
+    <dd>{{ e.department }}</dd>
+    <dt>E-mail</dt>
+    <dd>
+      <a [href]="'mailto:' + e.email">{{ e.email }}</a>
+    </dd>
+    <dt>Lieu de travail</dt>
+    <dd>{{ e.remote ? 'En télétravail' : 'Sur site' }}</dd>
+  </dl>
 }

@@ -1,12 +1,10 @@
-.remove {
-  margin-top: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid #b91c1c;
-  border-radius: 0.25rem;
-  background: none;
+.error {
   color: #b91c1c;
+}
+
+.retry {
+  padding: 0.25rem 0.75rem;
   font: inherit;
-  cursor: pointer;
 }
 
 /* Mobile d'abord : une colonne, puis une grille sur les écrans plus larges. */

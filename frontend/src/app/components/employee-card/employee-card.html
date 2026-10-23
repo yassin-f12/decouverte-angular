@@ -6,9 +6,10 @@
     <p class="card__job">{{ employee().job }}</p>
   } @else {
     <h3 class="card__name">
-      <a [routerLink]="['/equipe', employee().id]"
-        >{{ employee().firstName }} {{ employee().lastName }}</a
-      >
+      <!-- Le nom mène à la fiche : /equipe/12 -->
+      <a [routerLink]="['/equipe', employee().id]">
+        {{ employee().firstName }} {{ employee().lastName }}
+      </a>
     </h3>
     <p class="card__job">{{ employee().job }}</p>
     <p>{{ employee().department }}</p>

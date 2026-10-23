@@ -1,33 +1,29 @@
-<h1 id="team-title">L'équipe</h1>
-<p>{{ employees().length }} collègues, dont {{ remoteCount() }} en télétravail</p>
+<h1>L'équipe</h1>
 
 <app-search-box [(query)]="search" />
 
-<select name="" id="" #service (change)="select(service.value)">
-  <option value="tous">Tous</option>
-  <option value="Informatique">Informatique</option>
-  <option value="Ressources humaines">Ressources humaines</option>
-</select>
-
-<p aria-live="polite">{{ filteredEmployees().length }} collègue(s) affiché(s)</p>
-
-<ul class="team">
-  @for (employee of filteredEmployees(); track employee.id) {
-    <li>
-      <app-employee-card [employee]="employee" [compact]="$index === 0" />
-      <p>{{ $index + 1 }} / {{ $count }}</p>
-
-      <button
-        type="button"
-        class="remove"
-        [attr.aria-label]="'Retirer ' + employee.firstName + ' ' + employee.lastName"
-        (click)="remove(employee.id)"
-        matFab
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
-    </li>
-  } @empty {
-    <li>Aucun collègue ne correspond à « {{ search() }} ».</li>
+<!-- Une seule zone annoncee au lecteur d'ecran : l'etat du chargement. -->
+<p aria-live="polite">
+  @if (employees.isLoading()) {
+    Chargement de l'équipe...
+  } @else if (employees.error()) {
+    Impossible de charger l'équipe.
+  } @else if (employees.hasValue()) {
+    {{ employees.value().length }} collègue(s) affiché(s)
   }
-</ul>
+</p>
+
+@if (employees.error()) {
+  <button type="button" class="retry" (click)="employees.reload()">Réessayer</button>
+}
+@if (employees.hasValue()) {
+  <ul class="team">
+    @for (employee of employees.value(); track employee.id) {
+      <li>
+        <app-employee-card [employee]="employee" />
+      </li>
+    } @empty {
+      <li>Aucun collègue ne correspond à « {{ search() }} ».</li>
+    }
+  </ul>
+}

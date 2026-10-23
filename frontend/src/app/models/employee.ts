@@ -7,4 +7,5 @@ export interface Employee {
   job: string;
   department: string;
   remote: boolean;
+  remoteDays: number | null;
 }

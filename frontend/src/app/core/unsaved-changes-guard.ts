@@ -1,11 +1,11 @@
 import { CanDeactivateFn } from '@angular/router';
 
 interface HasUnsavedChanges {
-  dirty(): boolean;
+  dirty?: () => boolean;
 }
 
 export const unsavedChangesGuard: CanDeactivateFn<HasUnsavedChanges> = (component) => {
-  if (component.dirty()) {
+  if (typeof component.dirty === 'function' && component.dirty()) {
     return confirm(
       'Vous avez des modifications non enregistrées. Voulez-vous vraiment quitter cette page ?',
     );

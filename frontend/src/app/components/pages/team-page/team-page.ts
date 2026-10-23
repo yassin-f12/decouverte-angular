@@ -1,41 +1,35 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { TeamStore } from '../../../core/team-store';
-import { SearchBox } from '../../search-box/search-box';
+import { httpResource } from '@angular/common/http';
+import { Component, signal } from '@angular/core';
 import { EmployeeCard } from '../../employee-card/employee-card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { Employee } from '../../../models/employee';
+import { SearchBox } from '../../search-box/search-box';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs';
 
 @Component({
-  imports: [SearchBox, EmployeeCard, MatButtonModule, MatIconModule],
+  imports: [EmployeeCard, SearchBox],
   selector: 'app-team-page',
   styleUrl: './team-page.css',
   templateUrl: './team-page.html',
 })
 export class TeamPage {
-  private readonly store = inject(TeamStore);
-  protected readonly employees = this.store.employees;
-  protected readonly remoteCount = this.store.remoteCount;
+  // Ce que l'utilisateur tape, à chaque frappe.
   protected readonly search = signal('');
-  protected readonly selectDepart = signal('tous');
+  // La même recherche, mais "calmée" : elle ne change que 300 ms après la dernière frappe.
+  // signal -> Observable (toObservable) -> opérateurs RxJS -> signal (toSignal).
+  private readonly debouncedSearch = toSignal(
+    toObservable(this.search).pipe(
+      debounceTime(300), // attend 300 ms sans nouvelle frappe
+      map((text) => text.trim()), // ignore les espaces autour
+      distinctUntilChanged(), // ignore une valeur identique à la précédente
+    ),
+    { initialValue: '' },
+  );
 
-  protected readonly filteredEmployees = computed(() => {
-    const text = this.search().trim().toLowerCase();
-    const select = this.selectDepart();
-
-    return this.store
-      .employees()
-      .filter(
-        (employee) =>
-          (employee.firstName + ' ' + employee.lastName).toLowerCase().includes(text) &&
-          (select === 'tous' || select === employee.department),
-      );
-  });
-
-  protected remove(id: number): void {
-    this.store.remove(id);
-  }
-
-  protected select(valeur: string) {
-    this.selectDepart.set(valeur);
-  }
+  // Relancée automatiquement quand search change.
+  // ?q=... : recherche côté serveur, _sort=lastName : tri par nom.
+  protected readonly employees = httpResource<Employee[]>(() => ({
+    url: '/api/employees',
+    params: { q: this.debouncedSearch(), _sort: 'lastName' },
+  }));
 }

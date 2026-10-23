@@ -1,19 +1,24 @@
-import { Component, computed, inject, input } from '@angular/core';
-import { TeamStore } from '../../../core/team-store';
+import { HttpErrorResponse, httpResource } from '@angular/common/http';
+import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MatButton } from '@angular/material/button';
-import { StatusBadge } from '../../status-badge/status-badge';
+import { Employee } from '../../../models/employee';
 
 @Component({
-  imports: [RouterLink, MatButton, StatusBadge],
+  imports: [RouterLink],
   selector: 'app-employee-detail',
   styleUrl: './employee-detail.css',
   templateUrl: './employee-detail.html',
 })
 export class EmployeeDetail {
-  private readonly store = inject(TeamStore);
-
+  // Le paramètre :id de l'adresse /equipe/:id (withComponentInputBinding).
   readonly id = input.required<string>();
 
-  readonly employee = computed(() => this.store.findById(Number(this.id())));
+  // Relancée si l'id change (passage d'une fiche à une autre).
+  protected readonly employee = httpResource<Employee>(() => `/api/employees/${this.id()}`);
+
+  // 404 : l'identifiant n'existe pas. On le distingue d'une panne du serveur.
+  protected readonly notFound = computed(() => {
+    const error = this.employee.error();
+    return error instanceof HttpErrorResponse && error.status === 404;
+  });
 }
