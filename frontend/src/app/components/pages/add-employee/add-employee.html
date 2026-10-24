@@ -1,4 +1,4 @@
-<h1>Ajouter un collègue</h1>
+<h1>{{ id() ? 'Modifier un collègue' : 'Ajouter un collègue' }}</h1>
 
 <p>Tous les champs sont obligatoires, sauf le télétravail.</p>
 
@@ -118,9 +118,12 @@
 
   <div class="form__actions">
     <button matButton="filled" type="submit" [disabled]="employeeForm().submitting()">
-      Ajouter
+      {{ id() ? 'Enregistrer' : 'Ajouter' }}
     </button>
-
-    <button matButton="outlined" type="button" (click)="resetForm()">Effacer</button>
+    @if (id()) {
+      <a matButton="outlined" [routerLink]="['/equipe', id()]">Annuler</a>
+    } @else {
+      <button matButton="outlined" type="button" (click)="resetForm()">Effacer</button>
+    }
   </div>
 </form>

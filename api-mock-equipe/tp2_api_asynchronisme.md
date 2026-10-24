@@ -21,34 +21,34 @@ Chaque module suit le même plan que le TP 1 bonus : **La notion**, **Pas à pas
 
 ## Choisir son niveau
 
-| Niveau            | Ce que vous faites                                                                 | Pour qui                                    |
-| ----------------- | ---------------------------------------------------------------------------------- | ------------------------------------------- |
-| **Débutant**      | Tous les modules "Pas à pas", dans l'ordre                                         | Les jours 4 et 5 vous ont semblé difficiles |
-| **Intermédiaire** | Les modules, puis le **défi intermédiaire** de chaque phase (indices fournis)      | Les modules vous semblent faciles           |
-| **Avancé**        | Les modules en lecture rapide, puis le **défi avancé** de chaque phase (sans aide) | Vous êtes à l'aise avec le TP 1 bonus       |
+| Niveau                   | Ce que vous faites                                                                         | Pour qui                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| **Débutant**      | Tous les modules "Pas à pas", dans l'ordre                                                | Les jours 4 et 5 vous ont semblé difficiles |
+| **Intermédiaire** | Les modules, puis le **défi intermédiaire** de chaque phase (indices fournis)      | Les modules vous semblent faciles            |
+| **Avancé**        | Les modules en lecture rapide, puis le **défi avancé** de chaque phase (sans aide) | Vous êtes à l'aise avec le TP 1 bonus      |
 
 ## Plan du TP
 
-| Phase                                   | Modules  | Ce que vous construisez                                             |
-| --------------------------------------- | -------- | ------------------------------------------------------------------- |
-| 1. L'asynchronisme                      | 1 à 4    | Une page "Labo" : minuteur, chargement simulé, chronomètre, horloge |
-| 2. Consommer une API                    | 5 à 8    | Les services de l'entreprise chargés depuis le serveur              |
-| 3. Authentification et routes protégées | 9 à 15   | Connexion, jeton, pages réservées, rôles, session expirée           |
-| 4. Le CRUD des collègues                | 16 à 21  | Annuaire, recherche, fiche, ajout, modification, suppression        |
-| 5. Les congés                           | 22 et 23 | Mes demandes de congé : liste, nouvelle demande, annulation         |
+| Phase                                     | Modules  | Ce que vous construisez                                               |
+| ----------------------------------------- | -------- | --------------------------------------------------------------------- |
+| 1. L'asynchronisme                        | 1 à 4   | Une page "Labo" : minuteur, chargement simulé, chronomètre, horloge |
+| 2. Consommer une API                      | 5 à 8   | Les services de l'entreprise chargés depuis le serveur               |
+| 3. Authentification et routes protégées | 9 à 15  | Connexion, jeton, pages réservées, rôles, session expirée         |
+| 4. Le CRUD des collègues                 | 16 à 21 | Annuaire, recherche, fiche, ajout, modification, suppression          |
+| 5. Les congés                            | 22 et 23 | Mes demandes de congé : liste, nouvelle demande, annulation          |
 
 ### Le vocabulaire en un coup d'oeil
 
-| Mot               | Ce que c'est                                                                                      |
-| ----------------- | ------------------------------------------------------------------------------------------------- |
-| **Asynchrone**    | Une opération dont le résultat arrive **plus tard** (minuteur, réponse d'un serveur)              |
-| **Promise**       | Une promesse de **une** valeur future. On l'attend avec `await`                                   |
+| Mot                     | Ce que c'est                                                                                                     |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Asynchrone**    | Une opération dont le résultat arrive **plus tard** (minuteur, réponse d'un serveur)                    |
+| **Promise**       | Une promesse de **une** valeur future. On l'attend avec `await`                                          |
 | **Observable**    | Un **flux** de valeurs dans le temps (zéro, une ou plusieurs). On s'y **abonne** avec `subscribe` |
-| **Opérateur**     | Une fonction RxJS qui transforme un flux : `map`, `filter`, `debounceTime`...                     |
-| **API REST**      | Un serveur qui répond à des requêtes HTTP (`GET`, `POST`, `PUT`, `DELETE`) avec du JSON           |
-| **Jeton** (token) | Une chaîne secrète remise à la connexion, à renvoyer à chaque requête pour prouver qui on est     |
-| **Intercepteur**  | Une fonction appelée pour **chaque** requête HTTP de l'application                                |
-| **Guard**         | Une fonction qui autorise ou refuse l'accès à une route                                           |
+| **Opérateur**    | Une fonction RxJS qui transforme un flux : `map`, `filter`, `debounceTime`...                              |
+| **API REST**      | Un serveur qui répond à des requêtes HTTP (`GET`, `POST`, `PUT`, `DELETE`) avec du JSON               |
+| **Jeton** (token) | Une chaîne secrète remise à la connexion, à renvoyer à chaque requête pour prouver qui on est              |
+| **Intercepteur**  | Une fonction appelée pour **chaque** requête HTTP de l'application                                       |
+| **Guard**         | Une fonction qui autorise ou refuse l'accès à une route                                                        |
 
 ---
 
@@ -301,11 +301,11 @@ Ce trio **chargement / succès / erreur** est le schéma de base de tout appel �
 
 Une Promise donne **une seule** valeur. Un **Observable** (bibliothèque **RxJS**, installée avec Angular) est un **flux** : il peut émettre **plusieurs valeurs** dans le temps, puis éventuellement se terminer.
 
-|                   | Promise                      | Observable                                           |
-| ----------------- | ---------------------------- | ---------------------------------------------------- |
-| Nombre de valeurs | Une                          | Zéro, une ou plusieurs                               |
-| Démarrage         | Tout de suite, à la création | Seulement quand quelqu'un s'**abonne** (`subscribe`) |
-| Arrêt             | Impossible                   | `unsubscribe()`                                      |
+|                   | Promise                        | Observable                                                   |
+| ----------------- | ------------------------------ | ------------------------------------------------------------ |
+| Nombre de valeurs | Une                            | Zéro, une ou plusieurs                                      |
+| Démarrage        | Tout de suite, à la création | Seulement quand quelqu'un s'**abonne** (`subscribe`) |
+| Arrêt            | Impossible                     | `unsubscribe()`                                            |
 
 `interval(1000)` crée un Observable qui émet 0, 1, 2, 3... toutes les secondes, **sans fin**. Si on ne se désabonne pas, il continue même quand on a quitté la page : c'est une **fuite mémoire**.
 
@@ -408,11 +408,11 @@ Un **opérateur** transforme un flux, comme un tuyau qui filtre ou modifie ce qu
 of(1, 2, 3, 4, 5, 6)  ->  filter(pair)  ->  2, 4, 6  ->  map(x 10)  ->  20, 40, 60
 ```
 
-| Opérateur | Rôle                                                | Équivalent sur un tableau |
-| --------- | --------------------------------------------------- | ------------------------- |
-| `map`     | Transforme chaque valeur                            | `tableau.map(...)`        |
-| `filter`  | Ne garde que certaines valeurs                      | `tableau.filter(...)`     |
-| `take(n)` | Garde les n premières valeurs, puis termine le flux | `tableau.slice(0, n)`     |
+| Opérateur  | Rôle                                                | Équivalent sur un tableau |
+| ----------- | ---------------------------------------------------- | -------------------------- |
+| `map`     | Transforme chaque valeur                             | `tableau.map(...)`       |
+| `filter`  | Ne garde que certaines valeurs                       | `tableau.filter(...)`    |
+| `take(n)` | Garde les n premières valeurs, puis termine le flux | `tableau.slice(0, n)`    |
 
 Dans Angular moderne, on affiche des **signals**. `toSignal(observable)` fait le pont : il s'abonne à l'Observable, met la dernière valeur dans un signal, et **se désabonne tout seul** quand le composant est détruit. Plus de `subscribe`, plus de fuite.
 
@@ -483,11 +483,11 @@ Puis une dernière section :
 - L'horloge avance chaque seconde, sans aucun `subscribe` dans votre code.
 - Résumez dans votre tête les trois outils de la phase :
 
-| Outil             | Quand l'utiliser                                                 |
-| ----------------- | ---------------------------------------------------------------- |
-| `async` / `await` | Attendre **une** réponse, puis continuer (envoyer un formulaire) |
-| `subscribe`       | Réagir à **chaque** valeur d'un flux (sans oublier de l'arrêter) |
-| `toSignal`        | **Afficher** les valeurs d'un flux dans un template              |
+| Outil                 | Quand l'utiliser                                                          |
+| --------------------- | ------------------------------------------------------------------------- |
+| `async` / `await` | Attendre **une** réponse, puis continuer (envoyer un formulaire)   |
+| `subscribe`         | Réagir à **chaque** valeur d'un flux (sans oublier de l'arrêter) |
+| `toSignal`          | **Afficher** les valeurs d'un flux dans un template                 |
 
 ---
 
@@ -514,11 +514,11 @@ Indices : `interval(1000).pipe(take(10), map((n) => 9 - n))`, un signal `countdo
 
 Une **API REST** est un serveur qui répond à des requêtes HTTP avec des données JSON :
 
-| Méthode  | Adresse             | Action                      |
-| -------- | ------------------- | --------------------------- |
+| Méthode   | Adresse               | Action                       |
+| ---------- | --------------------- | ---------------------------- |
 | `GET`    | `/api/employees`    | Lire la liste des collègues |
 | `GET`    | `/api/employees/12` | Lire le collègue 12         |
-| `POST`   | `/api/employees`    | Créer un collègue           |
+| `POST`   | `/api/employees`    | Créer un collègue          |
 | `PUT`    | `/api/employees/12` | Remplacer le collègue 12    |
 | `DELETE` | `/api/employees/12` | Supprimer le collègue 12    |
 
@@ -539,9 +539,9 @@ npm start
 Le terminal affiche l'adresse de l'API et les comptes de démonstration.
 
 2. Explorez l'API dans le navigateur :
+
    - http://localhost:3000/api/departments : la liste des 5 services, en JSON. Cette route est **publique**.
    - http://localhost:3000/api/employees : `{ "message": "Authentification requise." }`. Cette route est **protégée** : il faudra se connecter (phase 3).
-
 3. À la racine de votre projet Angular (à côté de `package.json`), créez `proxy.conf.json` :
 
 ```json
@@ -725,13 +725,13 @@ Le template ne change pas : `departments()` reste un signal.
 
 Un vrai écran doit gérer trois situations : **en cours de chargement**, **erreur**, **données reçues**. Avec `toSignal`, il faudrait les coder à la main. `httpResource` le fait pour vous : il lance un `GET` et expose le résultat sous forme de signals.
 
-| Signal ou méthode | Signification                                             |
-| ----------------- | --------------------------------------------------------- |
-| `isLoading()`     | La requête est en cours                                   |
-| `error()`         | L'erreur, si la requête a échoué                          |
-| `hasValue()`      | Une réponse est disponible                                |
-| `value()`         | La réponse (à lire seulement si `hasValue()` vaut `true`) |
-| `reload()`        | Relance la requête                                        |
+| Signal ou méthode | Signification                                                   |
+| ------------------ | --------------------------------------------------------------- |
+| `isLoading()`    | La requête est en cours                                        |
+| `error()`        | L'erreur, si la requête a échoué                             |
+| `hasValue()`     | Une réponse est disponible                                     |
+| `value()`        | La réponse (à lire seulement si `hasValue()` vaut `true`) |
+| `reload()`       | Relance la requête                                             |
 
 **À retenir pour la suite** : `httpResource` sert à **lire** des données (`GET`). Pour **agir** (créer, modifier, supprimer), on utilise `HttpClient`.
 
@@ -785,11 +785,11 @@ Pourquoi un seul paragraphe `aria-live` ? Si toute la liste était dans une zone
 - Relancez l'API (`npm start`), puis cliquez sur "Réessayer" : la liste revient, sans recharger la page.
 - Comparez les trois façons de lire des données vues dans cette phase :
 
-| Façon          | Code                         | Chargement et erreur                           |
-| -------------- | ---------------------------- | ---------------------------------------------- |
-| `subscribe`    | Signal + `subscribe` + `set` | À coder à la main                              |
-| `toSignal`     | Une ligne                    | À coder à la main                              |
-| `httpResource` | Une ligne                    | Fournis : `isLoading()`, `error()`, `reload()` |
+| Façon           | Code                             | Chargement et erreur                                 |
+| ---------------- | -------------------------------- | ---------------------------------------------------- |
+| `subscribe`    | Signal + `subscribe` + `set` | À coder à la main                                  |
+| `toSignal`     | Une ligne                        | À coder à la main                                  |
+| `httpResource` | Une ligne                        | Fournis : `isLoading()`, `error()`, `reload()` |
 
 ---
 
@@ -829,10 +829,10 @@ Le **jeton** est comme un badge d'entreprise : remis une fois à l'accueil (conn
 
 Comptes de démonstration (mot de passe `TechCorp2026!`) :
 
-| E-mail                       | Rôle                         |
-| ---------------------------- | ---------------------------- |
-| `claire.martin@techcorp.fr`  | Employée (`employee`)        |
-| `julien.bernard@techcorp.fr` | Employé (`employee`)         |
+| E-mail                         | Rôle                          |
+| ------------------------------ | ------------------------------ |
+| `claire.martin@techcorp.fr`  | Employée (`employee`)       |
+| `julien.bernard@techcorp.fr` | Employé (`employee`)        |
 | `sarah.lefevre@techcorp.fr`  | Administratrice RH (`admin`) |
 
 ## Module 9 - Le service d'authentification (20 min)
@@ -1503,12 +1503,12 @@ function safeReturnUrl(url: string | undefined): string {
 
 Le jeton est dans un signal, donc en mémoire : `F5` le fait disparaître. On le recopie dans le **stockage du navigateur** pour le retrouver au démarrage.
 
-| Stockage                                | Durée de vie                     | Lisible par JavaScript |
-| --------------------------------------- | -------------------------------- | ---------------------- |
-| Signal (mémoire)                        | Jusqu'au rechargement            | Oui                    |
-| `sessionStorage`                        | Jusqu'à la fermeture de l'onglet | Oui                    |
-| `localStorage`                          | Pour toujours                    | Oui                    |
-| Cookie `HttpOnly` (posé par le serveur) | Fixée par le serveur             | **Non**                |
+| Stockage                                   | Durée de vie                     | Lisible par JavaScript |
+| ------------------------------------------ | --------------------------------- | ---------------------- |
+| Signal (mémoire)                          | Jusqu'au rechargement             | Oui                    |
+| `sessionStorage`                         | Jusqu'à la fermeture de l'onglet | Oui                    |
+| `localStorage`                           | Pour toujours                     | Oui                    |
+| Cookie `HttpOnly` (posé par le serveur) | Fixée par le serveur             | **Non**          |
 
 **Le risque** : tout ce qui est lisible par JavaScript peut être volé par un script malveillant injecté dans la page (faille **XSS**). On choisit ici `sessionStorage`, un compromis : le jeton disparaît à la fermeture de l'onglet, et il expire au bout de 30 minutes. En entreprise, on préfère souvent un cookie `HttpOnly`, invisible pour JavaScript (vu au jour 5).
 
@@ -2311,7 +2311,7 @@ Et désactivez le bouton pendant l'envoi :
 
 ---
 
-## _Module 20 - Modifier un collègue (20 min) -> ta stoppé la_
+## Module 20 - Modifier un collègue (20 min)
 
 ### La notion
 
@@ -2325,11 +2325,11 @@ Pour charger la fiche, on utilise `subscribe` (module 6). Pas besoin de se désa
 ### Pas à pas
 
 1. Dans `add-employee.ts` :
+
    - ajoutez `OnInit` et `input` à l'import de `@angular/core`, et `RouterLink` à celui de `@angular/router` ;
    - ajoutez `RouterLink` au tableau `imports` du composant ;
    - importez le modèle : `import { Employee } from '../../models/employee';` ;
    - la classe implémente `OnInit` : `export class AddEmployee implements OnInit {`.
-
 2. Dans la classe, sous `router`, ajoutez l'entrée :
 
 ```ts
@@ -3238,32 +3238,32 @@ Créez une page **"Demandes à traiter"** (`/demandes`), réservée à l'adminis
 
 ## Ce que vous retrouverez dans TechCorp RH
 
-| Ce TP                                                       | Le projet fil rouge                                    |
-| ----------------------------------------------------------- | ------------------------------------------------------ |
-| `DepartmentApi`, `toSignal` (modules 6, 7)                  | Les services d'accès à l'API (jour 4)                  |
-| `httpResource` (modules 8, 16, 18, 22)                      | `EmployeeDirectory`, `LeaveStore` (jour 4)             |
+| Ce TP                                                            | Le projet fil rouge                                      |
+| ---------------------------------------------------------------- | -------------------------------------------------------- |
+| `DepartmentApi`, `toSignal` (modules 6, 7)                   | Les services d'accès à l'API (jour 4)                  |
+| `httpResource` (modules 8, 16, 18, 22)                         | `EmployeeDirectory`, `LeaveStore` (jour 4)           |
 | `HttpClient` + `firstValueFrom` pour agir (modules 19 à 23) | Création et annulation d'une demande de congé (jour 4) |
-| `AuthStore`, page de connexion (modules 9, 10, 13)          | `Session`, page de connexion (jour 5)                  |
-| `authInterceptor` (modules 11, 15)                          | `authInterceptor` (jour 5)                             |
-| `authGuard`, `adminGuard` (modules 12, 14)                  | `authGuard`, `teamAccessGuard` (jours 3 et 5)          |
-| La fausse API json-server                                   | L'API NestJS avec JWT et bcrypt (jour 5)               |
+| `AuthStore`, page de connexion (modules 9, 10, 13)             | `Session`, page de connexion (jour 5)                  |
+| `authInterceptor` (modules 11, 15)                             | `authInterceptor` (jour 5)                             |
+| `authGuard`, `adminGuard` (modules 12, 14)                   | `authGuard`, `teamAccessGuard` (jours 3 et 5)        |
+| La fausse API json-server                                        | L'API NestJS avec JWT et bcrypt (jour 5)                 |
 
 ---
 
 ## Erreurs fréquentes
 
-| Symptôme                                                                                | Cause probable                                           | Solution                                                                       |
-| --------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Erreur 502 sur `/api/...`, `http proxy error ... ECONNREFUSED` dans le terminal Angular | L'API n'est pas lancée                                   | `npm start` dans `api-mock-equipe`                                             |
-| Erreur 404 sur `/api/...` en `GET`                                                      | Proxy non pris en compte                                 | Vérifier `proxy.conf.json` et `angular.json`, puis **redémarrer** `npm start`  |
-| `NullInjectorError: No provider for HttpClient`                                         | `provideHttpClient()` absent de `app.config.ts`          | L'ajouter (module 5)                                                           |
-| 401 sur toutes les routes protégées alors qu'on est connecté                            | Intercepteur non branché, ou jeton envoyé sans `Bearer ` | `withInterceptors([authInterceptor])`, vérifier l'en-tête dans l'onglet Réseau |
-| Déconnecté à chaque `F5`                                                                | Session non sauvegardée                                  | Module 13 : `readSession()` et `saveSession()`                                 |
-| Renvoyé sur la connexion après un redémarrage de l'API                                  | Comportement normal : l'API a oublié les jetons          | Se reconnecter                                                                 |
-| Aucune requête ne part                                                                  | `subscribe` oublié sur un Observable de `HttpClient`     | S'abonner, ou utiliser `toSignal` / `firstValueFrom`                           |
-| `NG0950: Input "id" is required but no value is available yet`                          | `withComponentInputBinding()` absent                     | L'ajouter à `provideRouter` (module 12)                                        |
-| `this.leaves.value()` lève une erreur                                                   | Lecture de `value()` alors que la requête a échoué       | Tester `hasValue()` avant                                                      |
-| Le formulaire s'envoie mais la liste ne change pas                                      | Liste non rechargée                                      | `this.leaves.reload()` après l'action                                          |
-| 403 "Action réservée aux administrateurs RH."                                           | Connecté avec un compte employé                          | Se connecter avec `sarah.lefevre@techcorp.fr`                                  |
-| La page déborde en largeur sur mobile                                                   | Tableau sans conteneur défilant                          | `.table-wrapper { position: relative; overflow-x: auto; }`                     |
-| Port 3000 déjà utilisé                                                                  | L'API du jour 4 (`api-mock`) tourne déjà                 | L'arrêter avant de lancer `api-mock-equipe`                                    |
+| Symptôme                                                                                   | Cause probable                                               | Solution                                                                                    |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| Erreur 502 sur `/api/...`, `http proxy error ... ECONNREFUSED` dans le terminal Angular | L'API n'est pas lancée                                      | `npm start` dans `api-mock-equipe`                                                      |
+| Erreur 404 sur `/api/...` en `GET`                                                      | Proxy non pris en compte                                     | Vérifier `proxy.conf.json` et `angular.json`, puis **redémarrer** `npm start` |
+| `NullInjectorError: No provider for HttpClient`                                           | `provideHttpClient()` absent de `app.config.ts`          | L'ajouter (module 5)                                                                        |
+| 401 sur toutes les routes protégées alors qu'on est connecté                             | Intercepteur non branché, ou jeton envoyé sans `Bearer ` | `withInterceptors([authInterceptor])`, vérifier l'en-tête dans l'onglet Réseau         |
+| Déconnecté à chaque `F5`                                                               | Session non sauvegardée                                     | Module 13 : `readSession()` et `saveSession()`                                          |
+| Renvoyé sur la connexion après un redémarrage de l'API                                   | Comportement normal : l'API a oublié les jetons             | Se reconnecter                                                                              |
+| Aucune requête ne part                                                                     | `subscribe` oublié sur un Observable de `HttpClient`    | S'abonner, ou utiliser `toSignal` / `firstValueFrom`                                    |
+| `NG0950: Input "id" is required but no value is available yet`                            | `withComponentInputBinding()` absent                       | L'ajouter à `provideRouter` (module 12)                                                  |
+| `this.leaves.value()` lève une erreur                                                    | Lecture de `value()` alors que la requête a échoué      | Tester `hasValue()` avant                                                                 |
+| Le formulaire s'envoie mais la liste ne change pas                                          | Liste non rechargée                                         | `this.leaves.reload()` après l'action                                                    |
+| 403 "Action réservée aux administrateurs RH."                                             | Connecté avec un compte employé                            | Se connecter avec `sarah.lefevre@techcorp.fr`                                             |
+| La page déborde en largeur sur mobile                                                      | Tableau sans conteneur défilant                             | `.table-wrapper { position: relative; overflow-x: auto; }`                                |
+| Port 3000 déjà utilisé                                                                   | L'API du jour 4 (`api-mock`) tourne déjà                 | L'arrêter avant de lancer `api-mock-equipe`                                              |

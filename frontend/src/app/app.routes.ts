@@ -8,6 +8,8 @@ import { Login } from './components/pages/login/login';
 import { Account } from './components/pages/account/account';
 import { adminGuard, authGuard, guestGuard } from './auth/auth.guards';
 import { AccesRefuse } from './components/pages/acces-refuse/acces-refuse';
+import { AddEmployee } from './components/pages/add-employee/add-employee';
+import { LeavesPage } from './components/pages/leaves/leaves-page';
 
 export const routes: Routes = [
   // Pages publiques.
@@ -47,6 +49,18 @@ export const routes: Routes = [
       import('./components/pages/add-employee/add-employee').then((mod) => mod.AddEmployee),
     canActivate: [authGuard, adminGuard],
     canDeactivate: [unsavedChangesGuard],
+  },
+  {
+    path: 'equipe/:id/modifier',
+    title: 'Modifier un collègue | TechCorp Équipe',
+    component: AddEmployee,
+    canActivate: [authGuard, adminGuard],
+  },
+  {
+    path: 'conges',
+    title: 'Mes congés | TechCorp Équipe',
+    component: LeavesPage,
+    canActivate: [authGuard],
   },
 
   // Toute autre adresse renvoie vers l'accueil. Toujours en dernier.

@@ -1,0 +1,144 @@
+<h1>Mes congés</h1>
+<p class="message" role="status">{{ message() }}</p>
+
+<section aria-labelledby="list-title">
+  <h2 id="list-title">Mes demandes</h2>
+
+  <p aria-live="polite">
+    @if (leaves.isLoading()) {
+      Chargement des demandes...
+    } @else if (leaves.error()) {
+      Impossible de charger vos demandes.
+    } @else if (leaves.hasValue()) {
+      {{ pendingCount() }} demande(s) en attente, {{ approvedPaidDays() }} jour(s) de congés payés
+      acceptés.
+    }
+  </p>
+
+  @if (leaves.error()) {
+    <button matButton="outlined" type="button" (click)="leaves.reload()">Réessayer</button>
+  }
+  @if (leaves.hasValue()) {
+    <!-- Un tableau qui defile horizontalement sur mobile, sans faire deborder la page. -->
+    <div class="table-wrapper" tabindex="0" role="region" aria-labelledby="list-title">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Type</th>
+            <th scope="col">Du</th>
+            <th scope="col">Au</th>
+            <th scope="col">Jours</th>
+            <th scope="col">Statut</th>
+            <th scope="col"><span class="visually-hidden">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (leave of leaves.value(); track leave.id) {
+            <tr>
+              <td>{{ typeLabels[leave.type] }}</td>
+              <td>{{ leave.startDate | date: 'd MMM y' }}</td>
+              <td>{{ leave.endDate | date: 'd MMM y' }}</td>
+              <td>{{ leave.days }}</td>
+              <td>
+                <span class="status" [class]="'status--' + leave.status">
+                  {{ statusLabels[leave.status] }}
+                </span>
+              </td>
+              <td>
+                @if (leave.status === 'pending') {
+                  <button
+                    matButton
+                    type="button"
+                    [attr.aria-label]="
+                      'Annuler la demande du ' + (leave.startDate | date: 'd MMMM y')
+                    "
+                    (click)="cancel(leave)"
+                  >
+                    Annuler
+                  </button>
+                }
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6">Aucune demande pour le moment.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>
+
+<section aria-labelledby="form-title">
+  <h2 id="form-title">Nouvelle demande</h2>
+
+  @let startDate = leaveForm.startDate(); @let endDate = leaveForm.endDate();
+  @let reason = leaveForm.reason();
+
+  <form class="form" [formRoot]="leaveForm">
+    <div class="field">
+      <label for="type">Type</label>
+      <select id="type" [formField]="leaveForm.type">
+        <option value="paid">Congés payés</option>
+        <option value="rtt">RTT</option>
+        <option value="unpaid">Sans solde</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="start-date">Date de début</label>
+      <input
+        id="start-date"
+        type="date"
+        [formField]="leaveForm.startDate"
+        [attr.aria-invalid]="startDate.touched() && startDate.invalid()"
+        [attr.aria-describedby]="
+          startDate.touched() && startDate.invalid() ? 'start-date-error' : null
+        "
+      />
+      @if (startDate.touched() && startDate.invalid()) {
+        <p class="field__error" id="start-date-error">
+          {{ startDate.errors()[0].message }}
+        </p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="end-date">Date de fin</label>
+      <input
+        id="end-date"
+        type="date"
+        [formField]="leaveForm.endDate"
+        [attr.aria-invalid]="endDate.touched() && endDate.invalid()"
+        [attr.aria-describedby]="endDate.touched() && endDate.invalid() ? 'end-date-error' : null"
+      />
+      @if (endDate.touched() && endDate.invalid()) {
+        <p class="field__error" id="end-date-error">
+          {{ endDate.errors()[0].message }}
+        </p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="reason">Motif (facultatif)</label>
+      <input
+        id="reason"
+        [formField]="leaveForm.reason"
+        [attr.aria-invalid]="reason.touched() && reason.invalid()"
+        [attr.aria-describedby]="reason.touched() && reason.invalid() ? 'reason-error' : null"
+      />
+      @if (reason.touched() && reason.invalid()) {
+        <p class="field__error" id="reason-error">
+          {{ reason.errors()[0].message }}
+        </p>
+      }
+    </div>
+
+    <div>
+      <button matButton="filled" type="submit" [disabled]="leaveForm().submitting()">
+        {{ leaveForm().submitting() ? 'Envoi...' : 'Envoyer la demande' }}
+      </button>
+    </div>
+  </form>
+</section>

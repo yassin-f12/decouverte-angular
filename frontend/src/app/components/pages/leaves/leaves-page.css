@@ -1,0 +1,94 @@
+section {
+  margin-top: 2rem;
+}
+
+/* position: relative : le texte masque (.visually-hidden) reste dans le cadre defilant. */
+.table-wrapper {
+  position: relative;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #d1d5db;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Le statut est ecrit en toutes lettres : la couleur n'est qu'un complement. */
+.status {
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+}
+
+.status--pending {
+  background-color: #fef3c7;
+  color: #78350f;
+}
+
+.status--approved {
+  background-color: #dcfce7;
+  color: #14532d;
+}
+
+.status--rejected {
+  background-color: #fee2e2;
+  color: #7f1d1d;
+}
+
+/* Lisible par les lecteurs d'ecran, invisible a l'ecran. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.message:empty {
+  display: none;
+}
+
+.message {
+  padding: 0.75rem;
+  border-left: 4px solid #1d4ed8;
+  background-color: #eff6ff;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 24rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+input,
+select {
+  padding: 0.5rem;
+  border: 1px solid #6b7280;
+  border-radius: 0.25rem;
+  font: inherit;
+}
+
+.field__error {
+  margin: 0;
+  color: #b91c1c;
+}
+
+[aria-invalid='true'] {
+  border-color: #b91c1c;
+}

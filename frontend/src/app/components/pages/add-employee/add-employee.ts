@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, signal, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   FormField,
@@ -14,11 +14,12 @@ import {
   required,
 } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { apiErrorMessage } from '../../../api/api-error';
 import { DepartmentApi } from '../../../api/department-api';
 import { EmployeeApi, EmployeeDraft } from '../../../api/employee-api';
+import { Employee } from '../../../models/employee';
 
 const EMPTY_DRAFT: EmployeeDraft = {
   firstName: '',
@@ -31,15 +32,17 @@ const EMPTY_DRAFT: EmployeeDraft = {
 };
 
 @Component({
-  imports: [FormField, FormRoot, MatButton],
+  imports: [FormField, FormRoot, MatButton, RouterLink],
   selector: 'app-add-employee',
   styleUrl: './add-employee.css',
   templateUrl: './add-employee.html',
 })
-export class AddEmployee {
+export class AddEmployee implements OnInit {
   private readonly api = inject(EmployeeApi);
   private readonly departmentApi = inject(DepartmentApi);
   private readonly router = inject(Router);
+  // Présent seulement en modification : le :id de l'adresse.
+  readonly id = input<string>();
 
   // La liste des services vient de l'API : Observable -> signal.
   protected readonly departments = toSignal(this.departmentApi.getNames(), {
@@ -90,6 +93,18 @@ export class AddEmployee {
   protected readonly serverError = signal('');
   protected readonly saved = signal(false);
 
+  ngOnInit(): void {
+    const id = this.id();
+    if (id) {
+      // Modification : on charge la fiche, puis on remplit le formulaire.
+      // Pas besoin de se désabonner : une requête HTTP émet une seule valeur puis se termine.
+      this.api.getById(Number(id)).subscribe({
+        next: (employee) => this.draft.set(toDraft(employee)),
+        error: (error: unknown) => this.serverError.set(apiErrorMessage(error)),
+      });
+    }
+  }
+
   public dirty(): boolean {
     return this.employeeForm().dirty() && !this.saved();
   }
@@ -102,11 +117,12 @@ export class AddEmployee {
 
   private async save(): Promise<TreeValidationResult> {
     this.serverError.set('');
+    const id = this.id();
     try {
-      const created = await firstValueFrom(this.api.create(this.draft()));
-      this.saved.set(true);
-      // Le serveur a choisi l'id : on affiche la fiche du nouveau collègue.
-      await this.router.navigate(['/equipe', created.id]);
+      const saved = id
+        ? await firstValueFrom(this.api.update(Number(id), this.draft()))
+        : await firstValueFrom(this.api.create(this.draft()));
+      await this.router.navigate(['/equipe', saved.id]);
       return undefined;
     } catch (error) {
       // 409 : e-mail déjà utilisé. L'erreur est rattachée au champ e-mail.
@@ -121,4 +137,10 @@ export class AddEmployee {
       return undefined;
     }
   }
+}
+// La fiche reçue contient un id : le formulaire, lui, n'en a pas.
+function toDraft(employee: Employee): EmployeeDraft {
+  const draft = { ...employee };
+  delete (draft as Partial<Employee>).id;
+  return draft;
 }

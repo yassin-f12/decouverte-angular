@@ -23,4 +23,22 @@
     <dt>Lieu de travail</dt>
     <dd>{{ e.remote ? 'En télétravail' : 'Sur site' }}</dd>
   </dl>
+  <!-- Boutons masques aux employes : confort d'affichage, le serveur verifie aussi. -->
+  @if (auth.isAdmin()) {
+    <div class="actions">
+      <a matButton="outlined" [routerLink]="['/equipe', e.id, 'modifier']">Modifier</a>
+      <button
+        matButton="filled"
+        type="button"
+        class="danger"
+        [disabled]="deleting()"
+        (click)="remove(e)"
+      >
+        {{ deleting() ? 'Suppression...' : 'Supprimer' }}
+      </button>
+    </div>
+  }
+  @if (actionError()) {
+    <p class="alert" role="alert">{{ actionError() }}</p>
+  }
 }
