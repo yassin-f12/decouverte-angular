@@ -32,7 +32,7 @@ jobs:
         run: npx ng lint
 
       - name: Lancer les tests
-        run: npx ng test --watch=false
+        run: npx ng test --no-watch
 
       - name: Compiler en production
         run: npx ng build
